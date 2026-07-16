@@ -4,6 +4,15 @@ on:
   schedule:
     - cron: '5 */4 * * *'
   workflow_dispatch:
+    inputs:
+      endpoint:
+        description: Protected endpoint to verify
+        required: true
+        default: cron
+        type: choice
+        options:
+          - cron
+          - test-email
 
 permissions:
   contents: read
@@ -17,9 +26,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Trigger protected Vercel scanner
+      - name: Trigger protected Vercel endpoint
         env:
           CRON_SECRET: ${{ secrets.CRON_SECRET }}
+          TARGET_ENDPOINT: ${{ inputs.endpoint || 'cron' }}
         run: |
           curl \
             --fail-with-body \
@@ -30,4 +40,4 @@ jobs:
             --retry-all-errors \
             --retry-delay 20 \
             --header "Authorization: Bearer ${CRON_SECRET}" \
-            https://hengshi-perpetual.vercel.app/api/cron
+            "https://hengshi-perpetual.vercel.app/api/${TARGET_ENDPOINT}"
