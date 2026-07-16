@@ -35,6 +35,15 @@ npm.cmd test
 supabase/migrations/202607160001_hengshi_shadow.sql
 ```
 
+为安全复用共享的 `crypto-alerts` 项目，本系统只创建以下带前缀的对象：
+
+```text
+hengshi_scan_runs
+hengshi_signals
+hengshi_paper_positions
+hengshi_paper_trades
+```
+
 应用迁移后，设置以下 Vercel 环境变量：
 
 ```text
@@ -58,9 +67,9 @@ ALERT_EMAIL_TO
 
 ## 定时扫描
 
-`vercel.json` 配置为 UTC 每 4 小时后的第 5 分钟执行 `/api/cron`。Vercel 会把 `CRON_SECRET` 自动放入 `Authorization: Bearer ...` 请求头。
+Vercel Hobby 计划只允许每日 Cron，因此本项目不使用 Vercel Cron。`.github/workflows/hengshi-scan.yml` 会在 UTC 每 4 小时后的第 5 分钟调用 `/api/cron`。
 
-如果 Vercel 账户计划不支持每 4 小时 Cron，应删除 `vercel.json` 中的 `crons` 项，并改用外部调度器调用同一受保护端点；不要创建不受鉴权的扫描入口。
+Vercel 项目与 GitHub 仓库必须配置相同的 `CRON_SECRET`。工作流通过 `Authorization: Bearer ...` 请求头调用受保护端点，不创建公开的扫描入口。
 
 ## 前瞻门槛
 

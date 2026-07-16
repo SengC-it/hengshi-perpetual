@@ -1,6 +1,4 @@
-create extension if not exists pgcrypto;
-
-create table if not exists public.scan_runs (
+create table if not exists public.hengshi_scan_runs (
   id uuid primary key default gen_random_uuid(),
   strategy_version text not null,
   bar_time timestamptz not null,
@@ -20,10 +18,10 @@ create table if not exists public.scan_runs (
   unique (strategy_version, bar_time)
 );
 
-create table if not exists public.signals (
+create table if not exists public.hengshi_signals (
   id bigint generated always as identity primary key,
   strategy_version text not null,
-  authorization text not null check (authorization = 'PAPER_ONLY'),
+  "authorization" text not null check ("authorization" = 'PAPER_ONLY'),
   live_orders_enabled boolean not null default false check (live_orders_enabled = false),
   symbol text not null,
   base_asset text not null,
@@ -41,9 +39,9 @@ create table if not exists public.signals (
   unique (strategy_version, symbol, signal_time, side)
 );
 
-create table if not exists public.paper_positions (
+create table if not exists public.hengshi_paper_positions (
   id uuid primary key default gen_random_uuid(),
-  signal_id bigint not null unique references public.signals(id) on delete restrict,
+  signal_id bigint not null unique references public.hengshi_signals(id) on delete restrict,
   strategy_version text not null,
   symbol text not null,
   base_asset text not null,
@@ -70,14 +68,14 @@ create table if not exists public.paper_positions (
   closed_at timestamptz
 );
 
-create unique index if not exists paper_positions_one_open_symbol
-  on public.paper_positions (strategy_version, symbol)
+create unique index if not exists hengshi_paper_positions_one_open_symbol
+  on public.hengshi_paper_positions (strategy_version, symbol)
   where status = 'open';
 
-create table if not exists public.paper_trades (
+create table if not exists public.hengshi_paper_trades (
   id bigint generated always as identity primary key,
-  position_id uuid not null unique references public.paper_positions(id) on delete restrict,
-  signal_id bigint not null references public.signals(id) on delete restrict,
+  position_id uuid not null unique references public.hengshi_paper_positions(id) on delete restrict,
+  signal_id bigint not null references public.hengshi_signals(id) on delete restrict,
   strategy_version text not null,
   symbol text not null,
   base_asset text not null,
@@ -100,25 +98,28 @@ create table if not exists public.paper_trades (
   created_at timestamptz not null default now()
 );
 
-create index if not exists scan_runs_bar_time_idx
-  on public.scan_runs (bar_time desc);
-create index if not exists signals_signal_time_idx
-  on public.signals (signal_time desc);
-create index if not exists paper_trades_exit_time_idx
-  on public.paper_trades (exit_time desc);
+create index if not exists hengshi_scan_runs_bar_time_idx
+  on public.hengshi_scan_runs (bar_time desc);
+create index if not exists hengshi_signals_signal_time_idx
+  on public.hengshi_signals (signal_time desc);
+create index if not exists hengshi_paper_trades_exit_time_idx
+  on public.hengshi_paper_trades (exit_time desc);
 
-alter table public.scan_runs enable row level security;
-alter table public.signals enable row level security;
-alter table public.paper_positions enable row level security;
-alter table public.paper_trades enable row level security;
+alter table public.hengshi_scan_runs enable row level security;
+alter table public.hengshi_signals enable row level security;
+alter table public.hengshi_paper_positions enable row level security;
+alter table public.hengshi_paper_trades enable row level security;
 
-revoke all on table public.scan_runs from anon, authenticated;
-revoke all on table public.signals from anon, authenticated;
-revoke all on table public.paper_positions from anon, authenticated;
-revoke all on table public.paper_trades from anon, authenticated;
+revoke all on table public.hengshi_scan_runs from public, anon, authenticated, service_role;
+revoke all on table public.hengshi_signals from public, anon, authenticated, service_role;
+revoke all on table public.hengshi_paper_positions from public, anon, authenticated, service_role;
+revoke all on table public.hengshi_paper_trades from public, anon, authenticated, service_role;
+revoke all on sequence public.hengshi_signals_id_seq from public, anon, authenticated, service_role;
+revoke all on sequence public.hengshi_paper_trades_id_seq from public, anon, authenticated, service_role;
 
-grant select, insert, update, delete on table public.scan_runs to service_role;
-grant select, insert, update, delete on table public.signals to service_role;
-grant select, insert, update, delete on table public.paper_positions to service_role;
-grant select, insert, update, delete on table public.paper_trades to service_role;
-grant usage, select on all sequences in schema public to service_role;
+grant select, insert, update, delete on table public.hengshi_scan_runs to service_role;
+grant select, insert, update, delete on table public.hengshi_signals to service_role;
+grant select, insert, update, delete on table public.hengshi_paper_positions to service_role;
+grant select, insert, update, delete on table public.hengshi_paper_trades to service_role;
+grant usage, select on sequence public.hengshi_signals_id_seq to service_role;
+grant usage, select on sequence public.hengshi_paper_trades_id_seq to service_role;

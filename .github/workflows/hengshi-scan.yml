@@ -1,0 +1,33 @@
+name: Hengshi four-hour scan
+
+on:
+  schedule:
+    - cron: '5 */4 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hengshi-four-hour-scan
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Trigger protected Vercel scanner
+        env:
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: |
+          curl \
+            --fail-with-body \
+            --show-error \
+            --silent \
+            --max-time 330 \
+            --retry 2 \
+            --retry-all-errors \
+            --retry-delay 20 \
+            --header "Authorization: Bearer ${CRON_SECRET}" \
+            https://hengshi-perpetual.vercel.app/api/cron

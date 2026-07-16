@@ -2,6 +2,7 @@ node_modules/
 .npm-cache/
 .tools/
 .vercel/
+supabase/.temp/
 .env
 .env.*
 !.env.example
