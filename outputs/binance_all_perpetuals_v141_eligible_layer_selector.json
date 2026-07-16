@@ -1,0 +1,4407 @@
+{
+  "outputFile": "C:\\Users\\CHI-HE\\Documents\\Codex\\2026-07-11\\data-analytics-plugin-data-analytics-openai\\outputs\\binance_all_perpetuals_v141_eligible_layer_selector.json",
+  "generatedAt": "2026-07-16T15:43:15.838Z",
+  "version": "v14.1-eligible-layer-only-causal-reversal-selector",
+  "evidenceStatus": "historical_research_on_previously_exposed_data",
+  "universe": {
+    "requested": 718,
+    "prepared": 708,
+    "rawReversalEvents": 28288,
+    "causalRapidBullLabels": 1964,
+    "modelTrainingLabels": 1312,
+    "eligibleTrainingOnly": true
+  },
+  "labelParity": {
+    "event": "um:XTZUSDT:1603195200000",
+    "netReturn": 0.033114748268955635,
+    "exitTime": 1603296000000,
+    "reason": "mean"
+  },
+  "targetSummary": {
+    "rows": 1964,
+    "positiveShare": 0.45213849287169044,
+    "meanTarget": -0.01742689351514384,
+    "byLayer": {
+      "liquid_low_vol": {
+        "rows": 443,
+        "positiveShare": 0.4898419864559819,
+        "meanTarget": 0.02905347228563597
+      },
+      "liquid_high_vol": {
+        "rows": 450,
+        "positiveShare": 0.4866666666666667,
+        "meanTarget": 0.00589632950164885
+      },
+      "tail_high_vol": {
+        "rows": 419,
+        "positiveShare": 0.4486873508353222,
+        "meanTarget": 0.024740786501202004
+      }
+    }
+  },
+  "model": {
+    "features": [
+      "reversalScore",
+      "shockRatio",
+      "logVolumeRatio",
+      "trendGap",
+      "distanceToEma20",
+      "emaGap",
+      "btcReturn30",
+      "btcEmaGap",
+      "layerLiquid",
+      "layerHighVol"
+    ],
+    "lookbackDays": 730,
+    "minimumTrainingRows": 300,
+    "ridgeLambda": 5,
+    "scoreQuantiles": [
+      0.3,
+      0.5,
+      0.7,
+      0.8,
+      0.9
+    ],
+    "scoreFloor": 0,
+    "labelKnownRule": "event exit time must be before the fold start"
+  },
+  "benchmark": {
+    "stress": {
+      "trades": 460,
+      "longTrades": 103,
+      "shortTrades": 357,
+      "winRate": 0.49130434782608695,
+      "profitFactor": 1.6399943697960855,
+      "totalReturn": 0.28537468532840427,
+      "maxDrawdown": -0.08828491766115554,
+      "netPnl": 28537.468532840314,
+      "fees": 7718.176783684491,
+      "modelCandidates": 761,
+      "finalSignals": 460,
+      "executedSignals": 460,
+      "maxSymbolContribution": 0.0431454066551126,
+      "profitableLayers": 3,
+      "byLayer": {
+        "liquid_high_vol": 11591.384629564594,
+        "tail_high_vol": 5127.725133751037,
+        "liquid_low_vol": 11818.358769524692
+      },
+      "quarters": [
+        {
+          "startTime": 1640995200000,
+          "endTime": 1648756800000,
+          "totalReturn": 0,
+          "trades": 0,
+          "signals": 0,
+          "trainingRows": 59,
+          "oosRows": 0,
+          "modelCandidates": 0
+        },
+        {
+          "startTime": 1648771200000,
+          "endTime": 1656619200000,
+          "totalReturn": 0,
+          "trades": 0,
+          "signals": 0,
+          "trainingRows": 60,
+          "oosRows": 25,
+          "modelCandidates": 0
+        },
+        {
+          "startTime": 1656633600000,
+          "endTime": 1664568000000,
+          "totalReturn": 0,
+          "trades": 0,
+          "signals": 0,
+          "trainingRows": 90,
+          "oosRows": 0,
+          "modelCandidates": 0
+        },
+        {
+          "startTime": 1664582400000,
+          "endTime": 1672516800000,
+          "totalReturn": 0,
+          "trades": 0,
+          "signals": 0,
+          "trainingRows": 90,
+          "oosRows": 74,
+          "modelCandidates": 0
+        },
+        {
+          "startTime": 1672531200000,
+          "endTime": 1680292800000,
+          "totalReturn": 0,
+          "trades": 0,
+          "signals": 0,
+          "trainingRows": 178,
+          "oosRows": 110,
+          "modelCandidates": 0
+        },
+        {
+          "startTime": 1680307200000,
+          "endTime": 1688155200000,
+          "totalReturn": 0,
+          "trades": 0,
+          "signals": 0,
+          "trainingRows": 365,
+          "oosRows": 233,
+          "modelCandidates": 0
+        },
+        {
+          "startTime": 1688169600000,
+          "endTime": 1696104000000,
+          "totalReturn": 0,
+          "trades": 0,
+          "signals": 0,
+          "trainingRows": 663,
+          "oosRows": 167,
+          "modelCandidates": 0
+        },
+        {
+          "startTime": 1696118400000,
+          "endTime": 1704052800000,
+          "totalReturn": 0,
+          "trades": 0,
+          "signals": 0,
+          "trainingRows": 887,
+          "oosRows": 106,
+          "modelCandidates": 0
+        },
+        {
+          "startTime": 1704067200000,
+          "endTime": 1711915200000,
+          "totalReturn": 0,
+          "trades": 0,
+          "signals": 0,
+          "trainingRows": 1029,
+          "oosRows": 36,
+          "modelCandidates": 0
+        },
+        {
+          "startTime": 1711929600000,
+          "endTime": 1719777600000,
+          "totalReturn": 0,
+          "trades": 0,
+          "signals": 0,
+          "trainingRows": 1161,
+          "oosRows": 188,
+          "modelCandidates": 0
+        },
+        {
+          "startTime": 1719792000000,
+          "endTime": 1727726400000,
+          "totalReturn": 0,
+          "trades": 0,
+          "signals": 0,
+          "trainingRows": 1425,
+          "oosRows": 267,
+          "modelCandidates": 0
+        },
+        {
+          "startTime": 1727740800000,
+          "endTime": 1735675200000,
+          "totalReturn": 0,
+          "trades": 0,
+          "signals": 0,
+          "trainingRows": 1915,
+          "oosRows": 439,
+          "modelCandidates": 0
+        },
+        {
+          "startTime": 1735689600000,
+          "endTime": 1743451200000,
+          "totalReturn": 0.11471201832130395,
+          "trades": 67,
+          "signals": 67,
+          "trainingRows": 2569,
+          "oosRows": 649,
+          "modelCandidates": 225
+        },
+        {
+          "startTime": 1743465600000,
+          "endTime": 1751313600000,
+          "totalReturn": 0.011268571480488765,
+          "trades": 54,
+          "signals": 54,
+          "trainingRows": 3378,
+          "oosRows": 517,
+          "modelCandidates": 69
+        },
+        {
+          "startTime": 1751328000000,
+          "endTime": 1759262400000,
+          "totalReturn": -0.03287337426350867,
+          "trades": 90,
+          "signals": 90,
+          "trainingRows": 3986,
+          "oosRows": 583,
+          "modelCandidates": 151
+        },
+        {
+          "startTime": 1759276800000,
+          "endTime": 1767211200000,
+          "totalReturn": 0.09277817773374064,
+          "trades": 76,
+          "signals": 76,
+          "trainingRows": 4787,
+          "oosRows": 803,
+          "modelCandidates": 85
+        },
+        {
+          "startTime": 1767225600000,
+          "endTime": 1774987200000,
+          "totalReturn": 0.033099391238418985,
+          "trades": 59,
+          "signals": 59,
+          "trainingRows": 5799,
+          "oosRows": 957,
+          "modelCandidates": 61
+        },
+        {
+          "startTime": 1775001600000,
+          "endTime": 1782849600000,
+          "totalReturn": 0.044342829847642706,
+          "trades": 114,
+          "signals": 114,
+          "trainingRows": 7130,
+          "oosRows": 1024,
+          "modelCandidates": 170
+        }
+      ],
+      "activeStart": 1735689600000,
+      "activeQuarters": 6,
+      "operationalDays": 546.8333333333334,
+      "operationalSignalsPerDay": 0.8412069491008838,
+      "positiveQuarterShare": 0.8333333333333334,
+      "lastFourQuarterReturn": 0.14025122808531743,
+      "longAudit": {
+        "trades": 103,
+        "winRate": 0.49514563106796117,
+        "netPnl": 6307.8305470929145,
+        "profitFactor": 1.8447625644075558,
+        "profitWithoutBest5": 2140.2465075081254,
+        "byLayerPnl": {
+          "tail_high_vol": 1057.8223521764132,
+          "liquid_high_vol": 2490.270073094645,
+          "liquid_low_vol": 2759.7381218218616
+        },
+        "byLayerTrades": {
+          "tail_high_vol": 41,
+          "liquid_high_vol": 28,
+          "liquid_low_vol": 34
+        }
+      },
+      "shortAudit": {
+        "trades": 357,
+        "winRate": 0.49019607843137253,
+        "netPnl": 22229.637985747388,
+        "profitFactor": 1.5988071527389374,
+        "profitWithoutBest5": 14673.633250061475,
+        "byLayerPnl": {
+          "liquid_high_vol": 9101.114556469947,
+          "tail_high_vol": 4069.902781574623,
+          "liquid_low_vol": 9058.62064770283
+        },
+        "byLayerTrades": {
+          "liquid_high_vol": 123,
+          "tail_high_vol": 97,
+          "liquid_low_vol": 137
+        }
+      }
+    },
+    "extreme": {
+      "trades": 460,
+      "longTrades": 103,
+      "shortTrades": 357,
+      "winRate": 0.48043478260869565,
+      "profitFactor": 1.4720582667629307,
+      "totalReturn": 0.2207281166220778,
+      "maxDrawdown": -0.0962380666400392,
+      "netPnl": 22072.811662207874,
+      "fees": 13420.195336521338,
+      "modelCandidates": 761,
+      "finalSignals": 460,
+      "executedSignals": 460,
+      "maxSymbolContribution": 0.0444563453157312,
+      "profitableLayers": 3,
+      "byLayer": {
+        "liquid_high_vol": 10446.664199669953,
+        "tail_high_vol": 2331.202944536337,
+        "liquid_low_vol": 9294.944518001586
+      },
+      "quarters": [
+        {
+          "startTime": 1640995200000,
+          "endTime": 1648756800000,
+          "totalReturn": 0,
+          "trades": 0,
+          "signals": 0,
+          "trainingRows": 59,
+          "oosRows": 0,
+          "modelCandidates": 0
+        },
+        {
+          "startTime": 1648771200000,
+          "endTime": 1656619200000,
+          "totalReturn": 0,
+          "trades": 0,
+          "signals": 0,
+          "trainingRows": 60,
+          "oosRows": 25,
+          "modelCandidates": 0
+        },
+        {
+          "startTime": 1656633600000,
+          "endTime": 1664568000000,
+          "totalReturn": 0,
+          "trades": 0,
+          "signals": 0,
+          "trainingRows": 90,
+          "oosRows": 0,
+          "modelCandidates": 0
+        },
+        {
+          "startTime": 1664582400000,
+          "endTime": 1672516800000,
+          "totalReturn": 0,
+          "trades": 0,
+          "signals": 0,
+          "trainingRows": 90,
+          "oosRows": 74,
+          "modelCandidates": 0
+        },
+        {
+          "startTime": 1672531200000,
+          "endTime": 1680292800000,
+          "totalReturn": 0,
+          "trades": 0,
+          "signals": 0,
+          "trainingRows": 178,
+          "oosRows": 110,
+          "modelCandidates": 0
+        },
+        {
+          "startTime": 1680307200000,
+          "endTime": 1688155200000,
+          "totalReturn": 0,
+          "trades": 0,
+          "signals": 0,
+          "trainingRows": 365,
+          "oosRows": 233,
+          "modelCandidates": 0
+        },
+        {
+          "startTime": 1688169600000,
+          "endTime": 1696104000000,
+          "totalReturn": 0,
+          "trades": 0,
+          "signals": 0,
+          "trainingRows": 663,
+          "oosRows": 167,
+          "modelCandidates": 0
+        },
+        {
+          "startTime": 1696118400000,
+          "endTime": 1704052800000,
+          "totalReturn": 0,
+          "trades": 0,
+          "signals": 0,
+          "trainingRows": 887,
+          "oosRows": 106,
+          "modelCandidates": 0
+        },
+        {
+          "startTime": 1704067200000,
+          "endTime": 1711915200000,
+          "totalReturn": 0,
+          "trades": 0,
+          "signals": 0,
+          "trainingRows": 1029,
+          "oosRows": 36,
+          "modelCandidates": 0
+        },
+        {
+          "startTime": 1711929600000,
+          "endTime": 1719777600000,
+          "totalReturn": 0,
+          "trades": 0,
+          "signals": 0,
+          "trainingRows": 1161,
+          "oosRows": 188,
+          "modelCandidates": 0
+        },
+        {
+          "startTime": 1719792000000,
+          "endTime": 1727726400000,
+          "totalReturn": 0,
+          "trades": 0,
+          "signals": 0,
+          "trainingRows": 1425,
+          "oosRows": 267,
+          "modelCandidates": 0
+        },
+        {
+          "startTime": 1727740800000,
+          "endTime": 1735675200000,
+          "totalReturn": 0,
+          "trades": 0,
+          "signals": 0,
+          "trainingRows": 1915,
+          "oosRows": 439,
+          "modelCandidates": 0
+        },
+        {
+          "startTime": 1735689600000,
+          "endTime": 1743451200000,
+          "totalReturn": 0.10968564687745097,
+          "trades": 67,
+          "signals": 67,
+          "trainingRows": 2569,
+          "oosRows": 649,
+          "modelCandidates": 225
+        },
+        {
+          "startTime": 1743465600000,
+          "endTime": 1751313600000,
+          "totalReturn": 0.006245746609737646,
+          "trades": 54,
+          "signals": 54,
+          "trainingRows": 3378,
+          "oosRows": 517,
+          "modelCandidates": 69
+        },
+        {
+          "startTime": 1751328000000,
+          "endTime": 1759262400000,
+          "totalReturn": -0.041931636705443975,
+          "trades": 90,
+          "signals": 90,
+          "trainingRows": 3986,
+          "oosRows": 583,
+          "modelCandidates": 151
+        },
+        {
+          "startTime": 1759276800000,
+          "endTime": 1767211200000,
+          "totalReturn": 0.08359435204108334,
+          "trades": 76,
+          "signals": 76,
+          "trainingRows": 4787,
+          "oosRows": 803,
+          "modelCandidates": 85
+        },
+        {
+          "startTime": 1767225600000,
+          "endTime": 1774987200000,
+          "totalReturn": 0.024799643127986437,
+          "trades": 59,
+          "signals": 59,
+          "trainingRows": 5799,
+          "oosRows": 957,
+          "modelCandidates": 61
+        },
+        {
+          "startTime": 1775001600000,
+          "endTime": 1782849600000,
+          "totalReturn": 0.027573092809564326,
+          "trades": 114,
+          "signals": 114,
+          "trainingRows": 7130,
+          "oosRows": 1024,
+          "modelCandidates": 170
+        }
+      ],
+      "activeStart": 1735689600000,
+      "activeQuarters": 6,
+      "operationalDays": 546.8333333333334,
+      "operationalSignalsPerDay": 0.8412069491008838,
+      "positiveQuarterShare": 0.8333333333333334,
+      "lastFourQuarterReturn": 0.09323850928053745,
+      "longAudit": {
+        "trades": 103,
+        "winRate": 0.4854368932038835,
+        "netPnl": 4355.550757926905,
+        "profitFactor": 1.5310988521443685,
+        "profitWithoutBest5": 454.3082174318969,
+        "byLayerPnl": {
+          "tail_high_vol": 145.1136731632871,
+          "liquid_high_vol": 2166.0242373231504,
+          "liquid_low_vol": 2044.412847440467
+        },
+        "byLayerTrades": {
+          "tail_high_vol": 41,
+          "liquid_high_vol": 28,
+          "liquid_low_vol": 34
+        }
+      },
+      "shortAudit": {
+        "trades": 357,
+        "winRate": 0.4789915966386555,
+        "netPnl": 17717.260904280956,
+        "profitFactor": 1.4595006304196632,
+        "profitWithoutBest5": 10397.627653372841,
+        "byLayerPnl": {
+          "liquid_high_vol": 8280.639962346797,
+          "tail_high_vol": 2186.0892713730477,
+          "liquid_low_vol": 7250.531670561116
+        },
+        "byLayerTrades": {
+          "liquid_high_vol": 123,
+          "tail_high_vol": 97,
+          "liquid_low_vol": 137
+        }
+      }
+    }
+  },
+  "variants": [
+    {
+      "id": "causal_long_q300",
+      "scoreQuantile": 0.3,
+      "modeledFolds": 8,
+      "modelCandidates": 83,
+      "stress": {
+        "trades": 407,
+        "longTrades": 46,
+        "shortTrades": 361,
+        "winRate": 0.4864864864864865,
+        "profitFactor": 1.510543506503626,
+        "totalReturn": 0.2109470265278195,
+        "maxDrawdown": -0.08742565390110768,
+        "netPnl": 21094.702652781823,
+        "fees": 6073.51712646791,
+        "modelCandidates": 654,
+        "finalSignals": 407,
+        "executedSignals": 407,
+        "maxSymbolContribution": 0.05133713114400569,
+        "profitableLayers": 3,
+        "byLayer": {
+          "liquid_high_vol": 8632.346214253963,
+          "tail_high_vol": 4316.646902783678,
+          "liquid_low_vol": 8145.709535744171
+        },
+        "quarters": [
+          {
+            "startTime": 1640995200000,
+            "endTime": 1648756800000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 59,
+            "oosRows": 0,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1648771200000,
+            "endTime": 1656619200000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 60,
+            "oosRows": 25,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1656633600000,
+            "endTime": 1664568000000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 90,
+            "oosRows": 0,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1664582400000,
+            "endTime": 1672516800000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 90,
+            "oosRows": 74,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1672531200000,
+            "endTime": 1680292800000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 178,
+            "oosRows": 110,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1680307200000,
+            "endTime": 1688155200000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 365,
+            "oosRows": 233,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1688169600000,
+            "endTime": 1696104000000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 663,
+            "oosRows": 167,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1696118400000,
+            "endTime": 1704052800000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 887,
+            "oosRows": 106,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1704067200000,
+            "endTime": 1711915200000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 1029,
+            "oosRows": 36,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1711929600000,
+            "endTime": 1719777600000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 1161,
+            "oosRows": 188,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1719792000000,
+            "endTime": 1727726400000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 1425,
+            "oosRows": 267,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1727740800000,
+            "endTime": 1735675200000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 1915,
+            "oosRows": 439,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1735689600000,
+            "endTime": 1743451200000,
+            "totalReturn": 0.10844373216955883,
+            "trades": 67,
+            "signals": 67,
+            "trainingRows": 2569,
+            "oosRows": 649,
+            "modelCandidates": 190
+          },
+          {
+            "startTime": 1743465600000,
+            "endTime": 1751313600000,
+            "totalReturn": 0.006243162874838282,
+            "trades": 57,
+            "signals": 57,
+            "trainingRows": 3378,
+            "oosRows": 517,
+            "modelCandidates": 82
+          },
+          {
+            "startTime": 1751328000000,
+            "endTime": 1759262400000,
+            "totalReturn": -0.031961886807646,
+            "trades": 89,
+            "signals": 89,
+            "trainingRows": 3986,
+            "oosRows": 583,
+            "modelCandidates": 146
+          },
+          {
+            "startTime": 1759276800000,
+            "endTime": 1767211200000,
+            "totalReturn": 0.09386552106039492,
+            "trades": 75,
+            "signals": 75,
+            "trainingRows": 4787,
+            "oosRows": 803,
+            "modelCandidates": 83
+          },
+          {
+            "startTime": 1767225600000,
+            "endTime": 1774987200000,
+            "totalReturn": 0.02363952042844608,
+            "trades": 54,
+            "signals": 54,
+            "trainingRows": 5799,
+            "oosRows": 957,
+            "modelCandidates": 56
+          },
+          {
+            "startTime": 1775001600000,
+            "endTime": 1782849600000,
+            "totalReturn": 0.001624908423609961,
+            "trades": 65,
+            "signals": 65,
+            "trainingRows": 7130,
+            "oosRows": 1024,
+            "modelCandidates": 97
+          }
+        ],
+        "activeStart": 1735689600000,
+        "activeQuarters": 6,
+        "operationalDays": 546.8333333333334,
+        "operationalSignalsPerDay": 0.7442852788783907,
+        "positiveQuarterShare": 0.8333333333333334,
+        "lastFourQuarterReturn": 0.08569678227273436,
+        "longAudit": {
+          "trades": 46,
+          "winRate": 0.4782608695652174,
+          "netPnl": -294.1104286302877,
+          "profitFactor": 0.9320171822373808,
+          "profitWithoutBest5": -2050.3441609506763,
+          "byLayerPnl": {
+            "tail_high_vol": 448.42450236588604,
+            "liquid_low_vol": -540.4134773833167,
+            "liquid_high_vol": -202.12145361285673
+          },
+          "byLayerTrades": {
+            "tail_high_vol": 19,
+            "liquid_low_vol": 11,
+            "liquid_high_vol": 16
+          }
+        },
+        "shortAudit": {
+          "trades": 361,
+          "winRate": 0.48753462603878117,
+          "netPnl": 21388.813081412125,
+          "profitFactor": 1.5782028766870433,
+          "profitWithoutBest5": 13977.033605625194,
+          "byLayerPnl": {
+            "liquid_high_vol": 8834.467667866817,
+            "tail_high_vol": 3868.2224004177933,
+            "liquid_low_vol": 8686.123013127488
+          },
+          "byLayerTrades": {
+            "liquid_high_vol": 124,
+            "tail_high_vol": 97,
+            "liquid_low_vol": 140
+          }
+        }
+      },
+      "extreme": {
+        "trades": 407,
+        "longTrades": 46,
+        "shortTrades": 361,
+        "winRate": 0.47665847665847666,
+        "profitFactor": 1.3744727510962977,
+        "totalReturn": 0.16123151126726465,
+        "maxDrawdown": -0.09472663149096683,
+        "netPnl": 16123.151126726429,
+        "fees": 10615.407049571972,
+        "modelCandidates": 654,
+        "finalSignals": 407,
+        "executedSignals": 407,
+        "maxSymbolContribution": 0.0524861838143144,
+        "profitableLayers": 3,
+        "byLayer": {
+          "liquid_high_vol": 7700.8094200082305,
+          "tail_high_vol": 2137.5242849569604,
+          "liquid_low_vol": 6284.817421761245
+        },
+        "quarters": [
+          {
+            "startTime": 1640995200000,
+            "endTime": 1648756800000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 59,
+            "oosRows": 0,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1648771200000,
+            "endTime": 1656619200000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 60,
+            "oosRows": 25,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1656633600000,
+            "endTime": 1664568000000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 90,
+            "oosRows": 0,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1664582400000,
+            "endTime": 1672516800000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 90,
+            "oosRows": 74,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1672531200000,
+            "endTime": 1680292800000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 178,
+            "oosRows": 110,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1680307200000,
+            "endTime": 1688155200000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 365,
+            "oosRows": 233,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1688169600000,
+            "endTime": 1696104000000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 663,
+            "oosRows": 167,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1696118400000,
+            "endTime": 1704052800000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 887,
+            "oosRows": 106,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1704067200000,
+            "endTime": 1711915200000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 1029,
+            "oosRows": 36,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1711929600000,
+            "endTime": 1719777600000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 1161,
+            "oosRows": 188,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1719792000000,
+            "endTime": 1727726400000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 1425,
+            "oosRows": 267,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1727740800000,
+            "endTime": 1735675200000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 1915,
+            "oosRows": 439,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1735689600000,
+            "endTime": 1743451200000,
+            "totalReturn": 0.10336546973865968,
+            "trades": 67,
+            "signals": 67,
+            "trainingRows": 2569,
+            "oosRows": 649,
+            "modelCandidates": 190
+          },
+          {
+            "startTime": 1743465600000,
+            "endTime": 1751313600000,
+            "totalReturn": 0.0007662780939534652,
+            "trades": 57,
+            "signals": 57,
+            "trainingRows": 3378,
+            "oosRows": 517,
+            "modelCandidates": 82
+          },
+          {
+            "startTime": 1751328000000,
+            "endTime": 1759262400000,
+            "totalReturn": -0.040329380462901576,
+            "trades": 89,
+            "signals": 89,
+            "trainingRows": 3986,
+            "oosRows": 583,
+            "modelCandidates": 146
+          },
+          {
+            "startTime": 1759276800000,
+            "endTime": 1767211200000,
+            "totalReturn": 0.0853478020924916,
+            "trades": 75,
+            "signals": 75,
+            "trainingRows": 4787,
+            "oosRows": 803,
+            "modelCandidates": 83
+          },
+          {
+            "startTime": 1767225600000,
+            "endTime": 1774987200000,
+            "totalReturn": 0.016107252185680876,
+            "trades": 54,
+            "signals": 54,
+            "trainingRows": 5799,
+            "oosRows": 957,
+            "modelCandidates": 56
+          },
+          {
+            "startTime": 1775001600000,
+            "endTime": 1782849600000,
+            "totalReturn": -0.006343952872396641,
+            "trades": 65,
+            "signals": 65,
+            "trainingRows": 7130,
+            "oosRows": 1024,
+            "modelCandidates": 97
+          }
+        ],
+        "activeStart": 1735689600000,
+        "activeQuarters": 6,
+        "operationalDays": 546.8333333333334,
+        "operationalSignalsPerDay": 0.7442852788783907,
+        "positiveQuarterShare": 0.6666666666666666,
+        "lastFourQuarterReturn": 0.05163918769842857,
+        "longAudit": {
+          "trades": 46,
+          "winRate": 0.4782608695652174,
+          "netPnl": -843.1685471607744,
+          "profitFactor": 0.8149374863601884,
+          "profitWithoutBest5": -2516.697799218725,
+          "byLayerPnl": {
+            "tail_high_vol": 111.38076266147101,
+            "liquid_low_vol": -641.0488179706941,
+            "liquid_high_vol": -313.5004918515508
+          },
+          "byLayerTrades": {
+            "tail_high_vol": 19,
+            "liquid_low_vol": 11,
+            "liquid_high_vol": 16
+          }
+        },
+        "shortAudit": {
+          "trades": 361,
+          "winRate": 0.47645429362880887,
+          "netPnl": 16966.31967388717,
+          "profitFactor": 1.4406896089898216,
+          "profitWithoutBest5": 9766.203555712067,
+          "byLayerPnl": {
+            "liquid_high_vol": 8014.309911859781,
+            "tail_high_vol": 2026.1435222954888,
+            "liquid_low_vol": 6925.86623973194
+          },
+          "byLayerTrades": {
+            "liquid_high_vol": 124,
+            "tail_high_vol": 97,
+            "liquid_low_vol": 140
+          }
+        }
+      },
+      "versusV124": {
+        "stressReturnDelta": -0.07442765880058477,
+        "extremeReturnDelta": -0.05949660535481316,
+        "frequencyDelta": -0.0969216702224931,
+        "headlineSuperior": false
+      },
+      "leaveOneQuarterOut": {
+        "rows": [
+          {
+            "excludedQuarter": "2025-01-01",
+            "combined": {
+              "trades": 340,
+              "netPnl": 10250.329435825966,
+              "profitFactor": 1.2818757099932436,
+              "profitWithoutBest": -2026.6411440048992
+            },
+            "long": {
+              "trades": 42,
+              "winRate": 0.47619047619047616,
+              "netPnl": -306.5288897796765,
+              "profitFactor": 0.919093649854353,
+              "profitWithoutBest5": -1947.1115611431026,
+              "byLayerPnl": {
+                "tail_high_vol": 169.45350855319487,
+                "liquid_high_vol": -202.12145361285673,
+                "liquid_low_vol": -273.8609447200148
+              },
+              "byLayerTrades": {
+                "tail_high_vol": 16,
+                "liquid_high_vol": 16,
+                "liquid_low_vol": 10
+              }
+            },
+            "short": {
+              "trades": 298,
+              "winRate": 0.4597315436241611,
+              "netPnl": 10556.858325605652,
+              "profitFactor": 1.3240683309778893,
+              "profitWithoutBest5": 3145.078849818716,
+              "byLayerPnl": {
+                "tail_high_vol": 766.2074077510479,
+                "liquid_high_vol": 2540.6878654606644,
+                "liquid_low_vol": 7249.963052393904
+              },
+              "byLayerTrades": {
+                "tail_high_vol": 88,
+                "liquid_high_vol": 78,
+                "liquid_low_vol": 132
+              }
+            }
+          },
+          {
+            "excludedQuarter": "2025-04-01",
+            "combined": {
+              "trades": 350,
+              "netPnl": 20402.683177028994,
+              "profitFactor": 1.5624736203730498,
+              "profitWithoutBest": 8049.5062555862105
+            },
+            "long": {
+              "trades": 22,
+              "winRate": 0.4090909090909091,
+              "netPnl": -84.74886758304513,
+              "profitFactor": 0.958088577004814,
+              "profitWithoutBest5": -1613.977377933667,
+              "byLayerPnl": {
+                "tail_high_vol": 426.1630872009225,
+                "liquid_low_vol": -458.0965690905186,
+                "liquid_high_vol": -52.815385693449684
+              },
+              "byLayerTrades": {
+                "tail_high_vol": 6,
+                "liquid_low_vol": 9,
+                "liquid_high_vol": 7
+              }
+            },
+            "short": {
+              "trades": 328,
+              "winRate": 0.4878048780487805,
+              "netPnl": 20487.432044612047,
+              "profitFactor": 1.5981549806910589,
+              "profitWithoutBest5": 13075.652568825124,
+              "byLayerPnl": {
+                "liquid_high_vol": 8562.809257141844,
+                "tail_high_vol": 3882.218848721437,
+                "liquid_low_vol": 8042.403938748748
+              },
+              "byLayerTrades": {
+                "liquid_high_vol": 106,
+                "tail_high_vol": 90,
+                "liquid_low_vol": 132
+              }
+            }
+          },
+          {
+            "excludedQuarter": "2025-07-01",
+            "combined": {
+              "trades": 318,
+              "netPnl": 24659.6162109594,
+              "profitFactor": 1.8230038270854443,
+              "profitWithoutBest": 12306.43928951658
+            },
+            "long": {
+              "trades": 31,
+              "winRate": 0.5483870967741935,
+              "netPnl": 255.21548549554086,
+              "profitFactor": 1.0896392621379178,
+              "profitWithoutBest5": -1278.7224035101065,
+              "byLayerPnl": {
+                "tail_high_vol": 497.4642642393584,
+                "liquid_low_vol": -348.8694409561002,
+                "liquid_high_vol": 106.62066221228238
+              },
+              "byLayerTrades": {
+                "tail_high_vol": 17,
+                "liquid_low_vol": 3,
+                "liquid_high_vol": 11
+              }
+            },
+            "short": {
+              "trades": 287,
+              "winRate": 0.519163763066202,
+              "netPnl": 24404.40072546385,
+              "profitFactor": 1.9000065714730736,
+              "profitWithoutBest5": 16992.62124967693,
+              "byLayerPnl": {
+                "liquid_high_vol": 6642.71867866379,
+                "tail_high_vol": 6636.398695351538,
+                "liquid_low_vol": 11125.283351448492
+              },
+              "byLayerTrades": {
+                "liquid_high_vol": 98,
+                "tail_high_vol": 76,
+                "liquid_low_vol": 113
+              }
+            }
+          },
+          {
+            "excludedQuarter": "2025-10-01",
+            "combined": {
+              "trades": 332,
+              "netPnl": 10959.903504157646,
+              "profitFactor": 1.3146796846001556,
+              "profitWithoutBest": 1864.711321195778
+            },
+            "long": {
+              "trades": 43,
+              "winRate": 0.46511627906976744,
+              "netPnl": -746.2690140236814,
+              "profitFactor": 0.8272852331008277,
+              "profitWithoutBest5": -2490.14780101225,
+              "byLayerPnl": {
+                "tail_high_vol": 252.19264710418224,
+                "liquid_low_vol": -540.4134773833167,
+                "liquid_high_vol": -458.0481837445461
+              },
+              "byLayerTrades": {
+                "tail_high_vol": 18,
+                "liquid_low_vol": 11,
+                "liquid_high_vol": 14
+              }
+            },
+            "short": {
+              "trades": 289,
+              "winRate": 0.4740484429065744,
+              "netPnl": 11706.172518181327,
+              "profitFactor": 1.3837090036806103,
+              "profitWithoutBest5": 6363.338523107111,
+              "byLayerPnl": {
+                "liquid_high_vol": 7993.113279167535,
+                "tail_high_vol": 845.699736028138,
+                "liquid_low_vol": 2867.3595029855924
+              },
+              "byLayerTrades": {
+                "liquid_high_vol": 109,
+                "tail_high_vol": 76,
+                "liquid_low_vol": 104
+              }
+            }
+          },
+          {
+            "excludedQuarter": "2026-01-01",
+            "combined": {
+              "trades": 353,
+              "netPnl": 18302.72687457939,
+              "profitFactor": 1.5006757051333677,
+              "profitWithoutBest": 5949.549953136616
+            },
+            "long": {
+              "trades": 46,
+              "winRate": 0.4782608695652174,
+              "netPnl": -294.1104286302877,
+              "profitFactor": 0.9320171822373808,
+              "profitWithoutBest5": -2050.3441609506763,
+              "byLayerPnl": {
+                "tail_high_vol": 448.42450236588604,
+                "liquid_low_vol": -540.4134773833167,
+                "liquid_high_vol": -202.12145361285673
+              },
+              "byLayerTrades": {
+                "tail_high_vol": 19,
+                "liquid_low_vol": 11,
+                "liquid_high_vol": 16
+              }
+            },
+            "short": {
+              "trades": 307,
+              "winRate": 0.4723127035830619,
+              "netPnl": 18596.837303209686,
+              "profitFactor": 1.577007440743371,
+              "profitWithoutBest5": 11185.05782742278,
+              "byLayerPnl": {
+                "liquid_high_vol": 8473.986066588932,
+                "tail_high_vol": 2814.3710809135255,
+                "liquid_low_vol": 7308.480155707216
+              },
+              "byLayerTrades": {
+                "liquid_high_vol": 114,
+                "tail_high_vol": 73,
+                "liquid_low_vol": 120
+              }
+            }
+          },
+          {
+            "excludedQuarter": "2026-04-01",
+            "combined": {
+              "trades": 342,
+              "netPnl": 20898.25406135783,
+              "profitFactor": 1.6409516320169077,
+              "profitWithoutBest": 9971.345810803305
+            },
+            "long": {
+              "trades": 46,
+              "winRate": 0.4782608695652174,
+              "netPnl": -294.1104286302877,
+              "profitFactor": 0.9320171822373808,
+              "profitWithoutBest5": -2050.3441609506763,
+              "byLayerPnl": {
+                "tail_high_vol": 448.42450236588604,
+                "liquid_low_vol": -540.4134773833167,
+                "liquid_high_vol": -202.12145361285673
+              },
+              "byLayerTrades": {
+                "tail_high_vol": 19,
+                "liquid_low_vol": 11,
+                "liquid_high_vol": 16
+              }
+            },
+            "short": {
+              "trades": 296,
+              "winRate": 0.5135135135135135,
+              "netPnl": 21192.36448998814,
+              "profitFactor": 1.7494083495476966,
+              "profitWithoutBest5": 14182.02156361955,
+              "byLayerPnl": {
+                "liquid_high_vol": 9959.02319231133,
+                "tail_high_vol": 4396.216233323282,
+                "liquid_low_vol": 6837.125064353485
+              },
+              "byLayerTrades": {
+                "liquid_high_vol": 115,
+                "tail_high_vol": 82,
+                "liquid_low_vol": 99
+              }
+            }
+          }
+        ],
+        "allCombinedPositive": true,
+        "allLongPositive": false,
+        "minimumCombinedNetPnl": 10250.329435825966,
+        "minimumLongNetPnl": -746.2690140236814,
+        "minimumLongWithoutBest5": -2490.14780101225,
+        "pass": false
+      },
+      "acceptance": null,
+      "validationPass": false
+    },
+    {
+      "id": "causal_long_q500",
+      "scoreQuantile": 0.5,
+      "modeledFolds": 8,
+      "modelCandidates": 83,
+      "stress": {
+        "trades": 407,
+        "longTrades": 46,
+        "shortTrades": 361,
+        "winRate": 0.4864864864864865,
+        "profitFactor": 1.510543506503626,
+        "totalReturn": 0.2109470265278195,
+        "maxDrawdown": -0.08742565390110768,
+        "netPnl": 21094.702652781823,
+        "fees": 6073.51712646791,
+        "modelCandidates": 654,
+        "finalSignals": 407,
+        "executedSignals": 407,
+        "maxSymbolContribution": 0.05133713114400569,
+        "profitableLayers": 3,
+        "byLayer": {
+          "liquid_high_vol": 8632.346214253963,
+          "tail_high_vol": 4316.646902783678,
+          "liquid_low_vol": 8145.709535744171
+        },
+        "quarters": [
+          {
+            "startTime": 1640995200000,
+            "endTime": 1648756800000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 59,
+            "oosRows": 0,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1648771200000,
+            "endTime": 1656619200000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 60,
+            "oosRows": 25,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1656633600000,
+            "endTime": 1664568000000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 90,
+            "oosRows": 0,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1664582400000,
+            "endTime": 1672516800000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 90,
+            "oosRows": 74,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1672531200000,
+            "endTime": 1680292800000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 178,
+            "oosRows": 110,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1680307200000,
+            "endTime": 1688155200000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 365,
+            "oosRows": 233,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1688169600000,
+            "endTime": 1696104000000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 663,
+            "oosRows": 167,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1696118400000,
+            "endTime": 1704052800000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 887,
+            "oosRows": 106,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1704067200000,
+            "endTime": 1711915200000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 1029,
+            "oosRows": 36,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1711929600000,
+            "endTime": 1719777600000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 1161,
+            "oosRows": 188,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1719792000000,
+            "endTime": 1727726400000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 1425,
+            "oosRows": 267,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1727740800000,
+            "endTime": 1735675200000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 1915,
+            "oosRows": 439,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1735689600000,
+            "endTime": 1743451200000,
+            "totalReturn": 0.10844373216955883,
+            "trades": 67,
+            "signals": 67,
+            "trainingRows": 2569,
+            "oosRows": 649,
+            "modelCandidates": 190
+          },
+          {
+            "startTime": 1743465600000,
+            "endTime": 1751313600000,
+            "totalReturn": 0.006243162874838282,
+            "trades": 57,
+            "signals": 57,
+            "trainingRows": 3378,
+            "oosRows": 517,
+            "modelCandidates": 82
+          },
+          {
+            "startTime": 1751328000000,
+            "endTime": 1759262400000,
+            "totalReturn": -0.031961886807646,
+            "trades": 89,
+            "signals": 89,
+            "trainingRows": 3986,
+            "oosRows": 583,
+            "modelCandidates": 146
+          },
+          {
+            "startTime": 1759276800000,
+            "endTime": 1767211200000,
+            "totalReturn": 0.09386552106039492,
+            "trades": 75,
+            "signals": 75,
+            "trainingRows": 4787,
+            "oosRows": 803,
+            "modelCandidates": 83
+          },
+          {
+            "startTime": 1767225600000,
+            "endTime": 1774987200000,
+            "totalReturn": 0.02363952042844608,
+            "trades": 54,
+            "signals": 54,
+            "trainingRows": 5799,
+            "oosRows": 957,
+            "modelCandidates": 56
+          },
+          {
+            "startTime": 1775001600000,
+            "endTime": 1782849600000,
+            "totalReturn": 0.001624908423609961,
+            "trades": 65,
+            "signals": 65,
+            "trainingRows": 7130,
+            "oosRows": 1024,
+            "modelCandidates": 97
+          }
+        ],
+        "activeStart": 1735689600000,
+        "activeQuarters": 6,
+        "operationalDays": 546.8333333333334,
+        "operationalSignalsPerDay": 0.7442852788783907,
+        "positiveQuarterShare": 0.8333333333333334,
+        "lastFourQuarterReturn": 0.08569678227273436,
+        "longAudit": {
+          "trades": 46,
+          "winRate": 0.4782608695652174,
+          "netPnl": -294.1104286302877,
+          "profitFactor": 0.9320171822373808,
+          "profitWithoutBest5": -2050.3441609506763,
+          "byLayerPnl": {
+            "tail_high_vol": 448.42450236588604,
+            "liquid_low_vol": -540.4134773833167,
+            "liquid_high_vol": -202.12145361285673
+          },
+          "byLayerTrades": {
+            "tail_high_vol": 19,
+            "liquid_low_vol": 11,
+            "liquid_high_vol": 16
+          }
+        },
+        "shortAudit": {
+          "trades": 361,
+          "winRate": 0.48753462603878117,
+          "netPnl": 21388.813081412125,
+          "profitFactor": 1.5782028766870433,
+          "profitWithoutBest5": 13977.033605625194,
+          "byLayerPnl": {
+            "liquid_high_vol": 8834.467667866817,
+            "tail_high_vol": 3868.2224004177933,
+            "liquid_low_vol": 8686.123013127488
+          },
+          "byLayerTrades": {
+            "liquid_high_vol": 124,
+            "tail_high_vol": 97,
+            "liquid_low_vol": 140
+          }
+        }
+      },
+      "extreme": {
+        "trades": 407,
+        "longTrades": 46,
+        "shortTrades": 361,
+        "winRate": 0.47665847665847666,
+        "profitFactor": 1.3744727510962977,
+        "totalReturn": 0.16123151126726465,
+        "maxDrawdown": -0.09472663149096683,
+        "netPnl": 16123.151126726429,
+        "fees": 10615.407049571972,
+        "modelCandidates": 654,
+        "finalSignals": 407,
+        "executedSignals": 407,
+        "maxSymbolContribution": 0.0524861838143144,
+        "profitableLayers": 3,
+        "byLayer": {
+          "liquid_high_vol": 7700.8094200082305,
+          "tail_high_vol": 2137.5242849569604,
+          "liquid_low_vol": 6284.817421761245
+        },
+        "quarters": [
+          {
+            "startTime": 1640995200000,
+            "endTime": 1648756800000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 59,
+            "oosRows": 0,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1648771200000,
+            "endTime": 1656619200000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 60,
+            "oosRows": 25,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1656633600000,
+            "endTime": 1664568000000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 90,
+            "oosRows": 0,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1664582400000,
+            "endTime": 1672516800000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 90,
+            "oosRows": 74,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1672531200000,
+            "endTime": 1680292800000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 178,
+            "oosRows": 110,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1680307200000,
+            "endTime": 1688155200000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 365,
+            "oosRows": 233,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1688169600000,
+            "endTime": 1696104000000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 663,
+            "oosRows": 167,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1696118400000,
+            "endTime": 1704052800000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 887,
+            "oosRows": 106,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1704067200000,
+            "endTime": 1711915200000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 1029,
+            "oosRows": 36,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1711929600000,
+            "endTime": 1719777600000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 1161,
+            "oosRows": 188,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1719792000000,
+            "endTime": 1727726400000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 1425,
+            "oosRows": 267,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1727740800000,
+            "endTime": 1735675200000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 1915,
+            "oosRows": 439,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1735689600000,
+            "endTime": 1743451200000,
+            "totalReturn": 0.10336546973865968,
+            "trades": 67,
+            "signals": 67,
+            "trainingRows": 2569,
+            "oosRows": 649,
+            "modelCandidates": 190
+          },
+          {
+            "startTime": 1743465600000,
+            "endTime": 1751313600000,
+            "totalReturn": 0.0007662780939534652,
+            "trades": 57,
+            "signals": 57,
+            "trainingRows": 3378,
+            "oosRows": 517,
+            "modelCandidates": 82
+          },
+          {
+            "startTime": 1751328000000,
+            "endTime": 1759262400000,
+            "totalReturn": -0.040329380462901576,
+            "trades": 89,
+            "signals": 89,
+            "trainingRows": 3986,
+            "oosRows": 583,
+            "modelCandidates": 146
+          },
+          {
+            "startTime": 1759276800000,
+            "endTime": 1767211200000,
+            "totalReturn": 0.0853478020924916,
+            "trades": 75,
+            "signals": 75,
+            "trainingRows": 4787,
+            "oosRows": 803,
+            "modelCandidates": 83
+          },
+          {
+            "startTime": 1767225600000,
+            "endTime": 1774987200000,
+            "totalReturn": 0.016107252185680876,
+            "trades": 54,
+            "signals": 54,
+            "trainingRows": 5799,
+            "oosRows": 957,
+            "modelCandidates": 56
+          },
+          {
+            "startTime": 1775001600000,
+            "endTime": 1782849600000,
+            "totalReturn": -0.006343952872396641,
+            "trades": 65,
+            "signals": 65,
+            "trainingRows": 7130,
+            "oosRows": 1024,
+            "modelCandidates": 97
+          }
+        ],
+        "activeStart": 1735689600000,
+        "activeQuarters": 6,
+        "operationalDays": 546.8333333333334,
+        "operationalSignalsPerDay": 0.7442852788783907,
+        "positiveQuarterShare": 0.6666666666666666,
+        "lastFourQuarterReturn": 0.05163918769842857,
+        "longAudit": {
+          "trades": 46,
+          "winRate": 0.4782608695652174,
+          "netPnl": -843.1685471607744,
+          "profitFactor": 0.8149374863601884,
+          "profitWithoutBest5": -2516.697799218725,
+          "byLayerPnl": {
+            "tail_high_vol": 111.38076266147101,
+            "liquid_low_vol": -641.0488179706941,
+            "liquid_high_vol": -313.5004918515508
+          },
+          "byLayerTrades": {
+            "tail_high_vol": 19,
+            "liquid_low_vol": 11,
+            "liquid_high_vol": 16
+          }
+        },
+        "shortAudit": {
+          "trades": 361,
+          "winRate": 0.47645429362880887,
+          "netPnl": 16966.31967388717,
+          "profitFactor": 1.4406896089898216,
+          "profitWithoutBest5": 9766.203555712067,
+          "byLayerPnl": {
+            "liquid_high_vol": 8014.309911859781,
+            "tail_high_vol": 2026.1435222954888,
+            "liquid_low_vol": 6925.86623973194
+          },
+          "byLayerTrades": {
+            "liquid_high_vol": 124,
+            "tail_high_vol": 97,
+            "liquid_low_vol": 140
+          }
+        }
+      },
+      "versusV124": {
+        "stressReturnDelta": -0.07442765880058477,
+        "extremeReturnDelta": -0.05949660535481316,
+        "frequencyDelta": -0.0969216702224931,
+        "headlineSuperior": false
+      },
+      "leaveOneQuarterOut": {
+        "rows": [
+          {
+            "excludedQuarter": "2025-01-01",
+            "combined": {
+              "trades": 340,
+              "netPnl": 10250.329435825966,
+              "profitFactor": 1.2818757099932436,
+              "profitWithoutBest": -2026.6411440048992
+            },
+            "long": {
+              "trades": 42,
+              "winRate": 0.47619047619047616,
+              "netPnl": -306.5288897796765,
+              "profitFactor": 0.919093649854353,
+              "profitWithoutBest5": -1947.1115611431026,
+              "byLayerPnl": {
+                "tail_high_vol": 169.45350855319487,
+                "liquid_high_vol": -202.12145361285673,
+                "liquid_low_vol": -273.8609447200148
+              },
+              "byLayerTrades": {
+                "tail_high_vol": 16,
+                "liquid_high_vol": 16,
+                "liquid_low_vol": 10
+              }
+            },
+            "short": {
+              "trades": 298,
+              "winRate": 0.4597315436241611,
+              "netPnl": 10556.858325605652,
+              "profitFactor": 1.3240683309778893,
+              "profitWithoutBest5": 3145.078849818716,
+              "byLayerPnl": {
+                "tail_high_vol": 766.2074077510479,
+                "liquid_high_vol": 2540.6878654606644,
+                "liquid_low_vol": 7249.963052393904
+              },
+              "byLayerTrades": {
+                "tail_high_vol": 88,
+                "liquid_high_vol": 78,
+                "liquid_low_vol": 132
+              }
+            }
+          },
+          {
+            "excludedQuarter": "2025-04-01",
+            "combined": {
+              "trades": 350,
+              "netPnl": 20402.683177028994,
+              "profitFactor": 1.5624736203730498,
+              "profitWithoutBest": 8049.5062555862105
+            },
+            "long": {
+              "trades": 22,
+              "winRate": 0.4090909090909091,
+              "netPnl": -84.74886758304513,
+              "profitFactor": 0.958088577004814,
+              "profitWithoutBest5": -1613.977377933667,
+              "byLayerPnl": {
+                "tail_high_vol": 426.1630872009225,
+                "liquid_low_vol": -458.0965690905186,
+                "liquid_high_vol": -52.815385693449684
+              },
+              "byLayerTrades": {
+                "tail_high_vol": 6,
+                "liquid_low_vol": 9,
+                "liquid_high_vol": 7
+              }
+            },
+            "short": {
+              "trades": 328,
+              "winRate": 0.4878048780487805,
+              "netPnl": 20487.432044612047,
+              "profitFactor": 1.5981549806910589,
+              "profitWithoutBest5": 13075.652568825124,
+              "byLayerPnl": {
+                "liquid_high_vol": 8562.809257141844,
+                "tail_high_vol": 3882.218848721437,
+                "liquid_low_vol": 8042.403938748748
+              },
+              "byLayerTrades": {
+                "liquid_high_vol": 106,
+                "tail_high_vol": 90,
+                "liquid_low_vol": 132
+              }
+            }
+          },
+          {
+            "excludedQuarter": "2025-07-01",
+            "combined": {
+              "trades": 318,
+              "netPnl": 24659.6162109594,
+              "profitFactor": 1.8230038270854443,
+              "profitWithoutBest": 12306.43928951658
+            },
+            "long": {
+              "trades": 31,
+              "winRate": 0.5483870967741935,
+              "netPnl": 255.21548549554086,
+              "profitFactor": 1.0896392621379178,
+              "profitWithoutBest5": -1278.7224035101065,
+              "byLayerPnl": {
+                "tail_high_vol": 497.4642642393584,
+                "liquid_low_vol": -348.8694409561002,
+                "liquid_high_vol": 106.62066221228238
+              },
+              "byLayerTrades": {
+                "tail_high_vol": 17,
+                "liquid_low_vol": 3,
+                "liquid_high_vol": 11
+              }
+            },
+            "short": {
+              "trades": 287,
+              "winRate": 0.519163763066202,
+              "netPnl": 24404.40072546385,
+              "profitFactor": 1.9000065714730736,
+              "profitWithoutBest5": 16992.62124967693,
+              "byLayerPnl": {
+                "liquid_high_vol": 6642.71867866379,
+                "tail_high_vol": 6636.398695351538,
+                "liquid_low_vol": 11125.283351448492
+              },
+              "byLayerTrades": {
+                "liquid_high_vol": 98,
+                "tail_high_vol": 76,
+                "liquid_low_vol": 113
+              }
+            }
+          },
+          {
+            "excludedQuarter": "2025-10-01",
+            "combined": {
+              "trades": 332,
+              "netPnl": 10959.903504157646,
+              "profitFactor": 1.3146796846001556,
+              "profitWithoutBest": 1864.711321195778
+            },
+            "long": {
+              "trades": 43,
+              "winRate": 0.46511627906976744,
+              "netPnl": -746.2690140236814,
+              "profitFactor": 0.8272852331008277,
+              "profitWithoutBest5": -2490.14780101225,
+              "byLayerPnl": {
+                "tail_high_vol": 252.19264710418224,
+                "liquid_low_vol": -540.4134773833167,
+                "liquid_high_vol": -458.0481837445461
+              },
+              "byLayerTrades": {
+                "tail_high_vol": 18,
+                "liquid_low_vol": 11,
+                "liquid_high_vol": 14
+              }
+            },
+            "short": {
+              "trades": 289,
+              "winRate": 0.4740484429065744,
+              "netPnl": 11706.172518181327,
+              "profitFactor": 1.3837090036806103,
+              "profitWithoutBest5": 6363.338523107111,
+              "byLayerPnl": {
+                "liquid_high_vol": 7993.113279167535,
+                "tail_high_vol": 845.699736028138,
+                "liquid_low_vol": 2867.3595029855924
+              },
+              "byLayerTrades": {
+                "liquid_high_vol": 109,
+                "tail_high_vol": 76,
+                "liquid_low_vol": 104
+              }
+            }
+          },
+          {
+            "excludedQuarter": "2026-01-01",
+            "combined": {
+              "trades": 353,
+              "netPnl": 18302.72687457939,
+              "profitFactor": 1.5006757051333677,
+              "profitWithoutBest": 5949.549953136616
+            },
+            "long": {
+              "trades": 46,
+              "winRate": 0.4782608695652174,
+              "netPnl": -294.1104286302877,
+              "profitFactor": 0.9320171822373808,
+              "profitWithoutBest5": -2050.3441609506763,
+              "byLayerPnl": {
+                "tail_high_vol": 448.42450236588604,
+                "liquid_low_vol": -540.4134773833167,
+                "liquid_high_vol": -202.12145361285673
+              },
+              "byLayerTrades": {
+                "tail_high_vol": 19,
+                "liquid_low_vol": 11,
+                "liquid_high_vol": 16
+              }
+            },
+            "short": {
+              "trades": 307,
+              "winRate": 0.4723127035830619,
+              "netPnl": 18596.837303209686,
+              "profitFactor": 1.577007440743371,
+              "profitWithoutBest5": 11185.05782742278,
+              "byLayerPnl": {
+                "liquid_high_vol": 8473.986066588932,
+                "tail_high_vol": 2814.3710809135255,
+                "liquid_low_vol": 7308.480155707216
+              },
+              "byLayerTrades": {
+                "liquid_high_vol": 114,
+                "tail_high_vol": 73,
+                "liquid_low_vol": 120
+              }
+            }
+          },
+          {
+            "excludedQuarter": "2026-04-01",
+            "combined": {
+              "trades": 342,
+              "netPnl": 20898.25406135783,
+              "profitFactor": 1.6409516320169077,
+              "profitWithoutBest": 9971.345810803305
+            },
+            "long": {
+              "trades": 46,
+              "winRate": 0.4782608695652174,
+              "netPnl": -294.1104286302877,
+              "profitFactor": 0.9320171822373808,
+              "profitWithoutBest5": -2050.3441609506763,
+              "byLayerPnl": {
+                "tail_high_vol": 448.42450236588604,
+                "liquid_low_vol": -540.4134773833167,
+                "liquid_high_vol": -202.12145361285673
+              },
+              "byLayerTrades": {
+                "tail_high_vol": 19,
+                "liquid_low_vol": 11,
+                "liquid_high_vol": 16
+              }
+            },
+            "short": {
+              "trades": 296,
+              "winRate": 0.5135135135135135,
+              "netPnl": 21192.36448998814,
+              "profitFactor": 1.7494083495476966,
+              "profitWithoutBest5": 14182.02156361955,
+              "byLayerPnl": {
+                "liquid_high_vol": 9959.02319231133,
+                "tail_high_vol": 4396.216233323282,
+                "liquid_low_vol": 6837.125064353485
+              },
+              "byLayerTrades": {
+                "liquid_high_vol": 115,
+                "tail_high_vol": 82,
+                "liquid_low_vol": 99
+              }
+            }
+          }
+        ],
+        "allCombinedPositive": true,
+        "allLongPositive": false,
+        "minimumCombinedNetPnl": 10250.329435825966,
+        "minimumLongNetPnl": -746.2690140236814,
+        "minimumLongWithoutBest5": -2490.14780101225,
+        "pass": false
+      },
+      "acceptance": null,
+      "validationPass": false
+    },
+    {
+      "id": "causal_long_q700",
+      "scoreQuantile": 0.7,
+      "modeledFolds": 8,
+      "modelCandidates": 70,
+      "stress": {
+        "trades": 407,
+        "longTrades": 46,
+        "shortTrades": 361,
+        "winRate": 0.4864864864864865,
+        "profitFactor": 1.510543506503626,
+        "totalReturn": 0.2109470265278195,
+        "maxDrawdown": -0.08742565390110768,
+        "netPnl": 21094.702652781823,
+        "fees": 6073.51712646791,
+        "modelCandidates": 641,
+        "finalSignals": 407,
+        "executedSignals": 407,
+        "maxSymbolContribution": 0.05133713114400569,
+        "profitableLayers": 3,
+        "byLayer": {
+          "liquid_high_vol": 8632.346214253963,
+          "tail_high_vol": 4316.646902783678,
+          "liquid_low_vol": 8145.709535744171
+        },
+        "quarters": [
+          {
+            "startTime": 1640995200000,
+            "endTime": 1648756800000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 59,
+            "oosRows": 0,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1648771200000,
+            "endTime": 1656619200000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 60,
+            "oosRows": 25,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1656633600000,
+            "endTime": 1664568000000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 90,
+            "oosRows": 0,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1664582400000,
+            "endTime": 1672516800000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 90,
+            "oosRows": 74,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1672531200000,
+            "endTime": 1680292800000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 178,
+            "oosRows": 110,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1680307200000,
+            "endTime": 1688155200000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 365,
+            "oosRows": 233,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1688169600000,
+            "endTime": 1696104000000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 663,
+            "oosRows": 167,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1696118400000,
+            "endTime": 1704052800000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 887,
+            "oosRows": 106,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1704067200000,
+            "endTime": 1711915200000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 1029,
+            "oosRows": 36,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1711929600000,
+            "endTime": 1719777600000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 1161,
+            "oosRows": 188,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1719792000000,
+            "endTime": 1727726400000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 1425,
+            "oosRows": 267,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1727740800000,
+            "endTime": 1735675200000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 1915,
+            "oosRows": 439,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1735689600000,
+            "endTime": 1743451200000,
+            "totalReturn": 0.10844373216955883,
+            "trades": 67,
+            "signals": 67,
+            "trainingRows": 2569,
+            "oosRows": 649,
+            "modelCandidates": 177
+          },
+          {
+            "startTime": 1743465600000,
+            "endTime": 1751313600000,
+            "totalReturn": 0.006243162874838282,
+            "trades": 57,
+            "signals": 57,
+            "trainingRows": 3378,
+            "oosRows": 517,
+            "modelCandidates": 82
+          },
+          {
+            "startTime": 1751328000000,
+            "endTime": 1759262400000,
+            "totalReturn": -0.031961886807646,
+            "trades": 89,
+            "signals": 89,
+            "trainingRows": 3986,
+            "oosRows": 583,
+            "modelCandidates": 146
+          },
+          {
+            "startTime": 1759276800000,
+            "endTime": 1767211200000,
+            "totalReturn": 0.09386552106039492,
+            "trades": 75,
+            "signals": 75,
+            "trainingRows": 4787,
+            "oosRows": 803,
+            "modelCandidates": 83
+          },
+          {
+            "startTime": 1767225600000,
+            "endTime": 1774987200000,
+            "totalReturn": 0.02363952042844608,
+            "trades": 54,
+            "signals": 54,
+            "trainingRows": 5799,
+            "oosRows": 957,
+            "modelCandidates": 56
+          },
+          {
+            "startTime": 1775001600000,
+            "endTime": 1782849600000,
+            "totalReturn": 0.001624908423609961,
+            "trades": 65,
+            "signals": 65,
+            "trainingRows": 7130,
+            "oosRows": 1024,
+            "modelCandidates": 97
+          }
+        ],
+        "activeStart": 1735689600000,
+        "activeQuarters": 6,
+        "operationalDays": 546.8333333333334,
+        "operationalSignalsPerDay": 0.7442852788783907,
+        "positiveQuarterShare": 0.8333333333333334,
+        "lastFourQuarterReturn": 0.08569678227273436,
+        "longAudit": {
+          "trades": 46,
+          "winRate": 0.4782608695652174,
+          "netPnl": -294.1104286302877,
+          "profitFactor": 0.9320171822373808,
+          "profitWithoutBest5": -2050.3441609506763,
+          "byLayerPnl": {
+            "tail_high_vol": 448.42450236588604,
+            "liquid_low_vol": -540.4134773833167,
+            "liquid_high_vol": -202.12145361285673
+          },
+          "byLayerTrades": {
+            "tail_high_vol": 19,
+            "liquid_low_vol": 11,
+            "liquid_high_vol": 16
+          }
+        },
+        "shortAudit": {
+          "trades": 361,
+          "winRate": 0.48753462603878117,
+          "netPnl": 21388.813081412125,
+          "profitFactor": 1.5782028766870433,
+          "profitWithoutBest5": 13977.033605625194,
+          "byLayerPnl": {
+            "liquid_high_vol": 8834.467667866817,
+            "tail_high_vol": 3868.2224004177933,
+            "liquid_low_vol": 8686.123013127488
+          },
+          "byLayerTrades": {
+            "liquid_high_vol": 124,
+            "tail_high_vol": 97,
+            "liquid_low_vol": 140
+          }
+        }
+      },
+      "extreme": {
+        "trades": 407,
+        "longTrades": 46,
+        "shortTrades": 361,
+        "winRate": 0.47665847665847666,
+        "profitFactor": 1.3744727510962977,
+        "totalReturn": 0.16123151126726465,
+        "maxDrawdown": -0.09472663149096683,
+        "netPnl": 16123.151126726429,
+        "fees": 10615.407049571972,
+        "modelCandidates": 641,
+        "finalSignals": 407,
+        "executedSignals": 407,
+        "maxSymbolContribution": 0.0524861838143144,
+        "profitableLayers": 3,
+        "byLayer": {
+          "liquid_high_vol": 7700.8094200082305,
+          "tail_high_vol": 2137.5242849569604,
+          "liquid_low_vol": 6284.817421761245
+        },
+        "quarters": [
+          {
+            "startTime": 1640995200000,
+            "endTime": 1648756800000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 59,
+            "oosRows": 0,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1648771200000,
+            "endTime": 1656619200000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 60,
+            "oosRows": 25,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1656633600000,
+            "endTime": 1664568000000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 90,
+            "oosRows": 0,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1664582400000,
+            "endTime": 1672516800000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 90,
+            "oosRows": 74,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1672531200000,
+            "endTime": 1680292800000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 178,
+            "oosRows": 110,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1680307200000,
+            "endTime": 1688155200000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 365,
+            "oosRows": 233,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1688169600000,
+            "endTime": 1696104000000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 663,
+            "oosRows": 167,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1696118400000,
+            "endTime": 1704052800000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 887,
+            "oosRows": 106,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1704067200000,
+            "endTime": 1711915200000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 1029,
+            "oosRows": 36,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1711929600000,
+            "endTime": 1719777600000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 1161,
+            "oosRows": 188,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1719792000000,
+            "endTime": 1727726400000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 1425,
+            "oosRows": 267,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1727740800000,
+            "endTime": 1735675200000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 1915,
+            "oosRows": 439,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1735689600000,
+            "endTime": 1743451200000,
+            "totalReturn": 0.10336546973865968,
+            "trades": 67,
+            "signals": 67,
+            "trainingRows": 2569,
+            "oosRows": 649,
+            "modelCandidates": 177
+          },
+          {
+            "startTime": 1743465600000,
+            "endTime": 1751313600000,
+            "totalReturn": 0.0007662780939534652,
+            "trades": 57,
+            "signals": 57,
+            "trainingRows": 3378,
+            "oosRows": 517,
+            "modelCandidates": 82
+          },
+          {
+            "startTime": 1751328000000,
+            "endTime": 1759262400000,
+            "totalReturn": -0.040329380462901576,
+            "trades": 89,
+            "signals": 89,
+            "trainingRows": 3986,
+            "oosRows": 583,
+            "modelCandidates": 146
+          },
+          {
+            "startTime": 1759276800000,
+            "endTime": 1767211200000,
+            "totalReturn": 0.0853478020924916,
+            "trades": 75,
+            "signals": 75,
+            "trainingRows": 4787,
+            "oosRows": 803,
+            "modelCandidates": 83
+          },
+          {
+            "startTime": 1767225600000,
+            "endTime": 1774987200000,
+            "totalReturn": 0.016107252185680876,
+            "trades": 54,
+            "signals": 54,
+            "trainingRows": 5799,
+            "oosRows": 957,
+            "modelCandidates": 56
+          },
+          {
+            "startTime": 1775001600000,
+            "endTime": 1782849600000,
+            "totalReturn": -0.006343952872396641,
+            "trades": 65,
+            "signals": 65,
+            "trainingRows": 7130,
+            "oosRows": 1024,
+            "modelCandidates": 97
+          }
+        ],
+        "activeStart": 1735689600000,
+        "activeQuarters": 6,
+        "operationalDays": 546.8333333333334,
+        "operationalSignalsPerDay": 0.7442852788783907,
+        "positiveQuarterShare": 0.6666666666666666,
+        "lastFourQuarterReturn": 0.05163918769842857,
+        "longAudit": {
+          "trades": 46,
+          "winRate": 0.4782608695652174,
+          "netPnl": -843.1685471607744,
+          "profitFactor": 0.8149374863601884,
+          "profitWithoutBest5": -2516.697799218725,
+          "byLayerPnl": {
+            "tail_high_vol": 111.38076266147101,
+            "liquid_low_vol": -641.0488179706941,
+            "liquid_high_vol": -313.5004918515508
+          },
+          "byLayerTrades": {
+            "tail_high_vol": 19,
+            "liquid_low_vol": 11,
+            "liquid_high_vol": 16
+          }
+        },
+        "shortAudit": {
+          "trades": 361,
+          "winRate": 0.47645429362880887,
+          "netPnl": 16966.31967388717,
+          "profitFactor": 1.4406896089898216,
+          "profitWithoutBest5": 9766.203555712067,
+          "byLayerPnl": {
+            "liquid_high_vol": 8014.309911859781,
+            "tail_high_vol": 2026.1435222954888,
+            "liquid_low_vol": 6925.86623973194
+          },
+          "byLayerTrades": {
+            "liquid_high_vol": 124,
+            "tail_high_vol": 97,
+            "liquid_low_vol": 140
+          }
+        }
+      },
+      "versusV124": {
+        "stressReturnDelta": -0.07442765880058477,
+        "extremeReturnDelta": -0.05949660535481316,
+        "frequencyDelta": -0.0969216702224931,
+        "headlineSuperior": false
+      },
+      "leaveOneQuarterOut": {
+        "rows": [
+          {
+            "excludedQuarter": "2025-01-01",
+            "combined": {
+              "trades": 340,
+              "netPnl": 10250.329435825966,
+              "profitFactor": 1.2818757099932436,
+              "profitWithoutBest": -2026.6411440048992
+            },
+            "long": {
+              "trades": 42,
+              "winRate": 0.47619047619047616,
+              "netPnl": -306.5288897796765,
+              "profitFactor": 0.919093649854353,
+              "profitWithoutBest5": -1947.1115611431026,
+              "byLayerPnl": {
+                "tail_high_vol": 169.45350855319487,
+                "liquid_high_vol": -202.12145361285673,
+                "liquid_low_vol": -273.8609447200148
+              },
+              "byLayerTrades": {
+                "tail_high_vol": 16,
+                "liquid_high_vol": 16,
+                "liquid_low_vol": 10
+              }
+            },
+            "short": {
+              "trades": 298,
+              "winRate": 0.4597315436241611,
+              "netPnl": 10556.858325605652,
+              "profitFactor": 1.3240683309778893,
+              "profitWithoutBest5": 3145.078849818716,
+              "byLayerPnl": {
+                "tail_high_vol": 766.2074077510479,
+                "liquid_high_vol": 2540.6878654606644,
+                "liquid_low_vol": 7249.963052393904
+              },
+              "byLayerTrades": {
+                "tail_high_vol": 88,
+                "liquid_high_vol": 78,
+                "liquid_low_vol": 132
+              }
+            }
+          },
+          {
+            "excludedQuarter": "2025-04-01",
+            "combined": {
+              "trades": 350,
+              "netPnl": 20402.683177028994,
+              "profitFactor": 1.5624736203730498,
+              "profitWithoutBest": 8049.5062555862105
+            },
+            "long": {
+              "trades": 22,
+              "winRate": 0.4090909090909091,
+              "netPnl": -84.74886758304513,
+              "profitFactor": 0.958088577004814,
+              "profitWithoutBest5": -1613.977377933667,
+              "byLayerPnl": {
+                "tail_high_vol": 426.1630872009225,
+                "liquid_low_vol": -458.0965690905186,
+                "liquid_high_vol": -52.815385693449684
+              },
+              "byLayerTrades": {
+                "tail_high_vol": 6,
+                "liquid_low_vol": 9,
+                "liquid_high_vol": 7
+              }
+            },
+            "short": {
+              "trades": 328,
+              "winRate": 0.4878048780487805,
+              "netPnl": 20487.432044612047,
+              "profitFactor": 1.5981549806910589,
+              "profitWithoutBest5": 13075.652568825124,
+              "byLayerPnl": {
+                "liquid_high_vol": 8562.809257141844,
+                "tail_high_vol": 3882.218848721437,
+                "liquid_low_vol": 8042.403938748748
+              },
+              "byLayerTrades": {
+                "liquid_high_vol": 106,
+                "tail_high_vol": 90,
+                "liquid_low_vol": 132
+              }
+            }
+          },
+          {
+            "excludedQuarter": "2025-07-01",
+            "combined": {
+              "trades": 318,
+              "netPnl": 24659.6162109594,
+              "profitFactor": 1.8230038270854443,
+              "profitWithoutBest": 12306.43928951658
+            },
+            "long": {
+              "trades": 31,
+              "winRate": 0.5483870967741935,
+              "netPnl": 255.21548549554086,
+              "profitFactor": 1.0896392621379178,
+              "profitWithoutBest5": -1278.7224035101065,
+              "byLayerPnl": {
+                "tail_high_vol": 497.4642642393584,
+                "liquid_low_vol": -348.8694409561002,
+                "liquid_high_vol": 106.62066221228238
+              },
+              "byLayerTrades": {
+                "tail_high_vol": 17,
+                "liquid_low_vol": 3,
+                "liquid_high_vol": 11
+              }
+            },
+            "short": {
+              "trades": 287,
+              "winRate": 0.519163763066202,
+              "netPnl": 24404.40072546385,
+              "profitFactor": 1.9000065714730736,
+              "profitWithoutBest5": 16992.62124967693,
+              "byLayerPnl": {
+                "liquid_high_vol": 6642.71867866379,
+                "tail_high_vol": 6636.398695351538,
+                "liquid_low_vol": 11125.283351448492
+              },
+              "byLayerTrades": {
+                "liquid_high_vol": 98,
+                "tail_high_vol": 76,
+                "liquid_low_vol": 113
+              }
+            }
+          },
+          {
+            "excludedQuarter": "2025-10-01",
+            "combined": {
+              "trades": 332,
+              "netPnl": 10959.903504157646,
+              "profitFactor": 1.3146796846001556,
+              "profitWithoutBest": 1864.711321195778
+            },
+            "long": {
+              "trades": 43,
+              "winRate": 0.46511627906976744,
+              "netPnl": -746.2690140236814,
+              "profitFactor": 0.8272852331008277,
+              "profitWithoutBest5": -2490.14780101225,
+              "byLayerPnl": {
+                "tail_high_vol": 252.19264710418224,
+                "liquid_low_vol": -540.4134773833167,
+                "liquid_high_vol": -458.0481837445461
+              },
+              "byLayerTrades": {
+                "tail_high_vol": 18,
+                "liquid_low_vol": 11,
+                "liquid_high_vol": 14
+              }
+            },
+            "short": {
+              "trades": 289,
+              "winRate": 0.4740484429065744,
+              "netPnl": 11706.172518181327,
+              "profitFactor": 1.3837090036806103,
+              "profitWithoutBest5": 6363.338523107111,
+              "byLayerPnl": {
+                "liquid_high_vol": 7993.113279167535,
+                "tail_high_vol": 845.699736028138,
+                "liquid_low_vol": 2867.3595029855924
+              },
+              "byLayerTrades": {
+                "liquid_high_vol": 109,
+                "tail_high_vol": 76,
+                "liquid_low_vol": 104
+              }
+            }
+          },
+          {
+            "excludedQuarter": "2026-01-01",
+            "combined": {
+              "trades": 353,
+              "netPnl": 18302.72687457939,
+              "profitFactor": 1.5006757051333677,
+              "profitWithoutBest": 5949.549953136616
+            },
+            "long": {
+              "trades": 46,
+              "winRate": 0.4782608695652174,
+              "netPnl": -294.1104286302877,
+              "profitFactor": 0.9320171822373808,
+              "profitWithoutBest5": -2050.3441609506763,
+              "byLayerPnl": {
+                "tail_high_vol": 448.42450236588604,
+                "liquid_low_vol": -540.4134773833167,
+                "liquid_high_vol": -202.12145361285673
+              },
+              "byLayerTrades": {
+                "tail_high_vol": 19,
+                "liquid_low_vol": 11,
+                "liquid_high_vol": 16
+              }
+            },
+            "short": {
+              "trades": 307,
+              "winRate": 0.4723127035830619,
+              "netPnl": 18596.837303209686,
+              "profitFactor": 1.577007440743371,
+              "profitWithoutBest5": 11185.05782742278,
+              "byLayerPnl": {
+                "liquid_high_vol": 8473.986066588932,
+                "tail_high_vol": 2814.3710809135255,
+                "liquid_low_vol": 7308.480155707216
+              },
+              "byLayerTrades": {
+                "liquid_high_vol": 114,
+                "tail_high_vol": 73,
+                "liquid_low_vol": 120
+              }
+            }
+          },
+          {
+            "excludedQuarter": "2026-04-01",
+            "combined": {
+              "trades": 342,
+              "netPnl": 20898.25406135783,
+              "profitFactor": 1.6409516320169077,
+              "profitWithoutBest": 9971.345810803305
+            },
+            "long": {
+              "trades": 46,
+              "winRate": 0.4782608695652174,
+              "netPnl": -294.1104286302877,
+              "profitFactor": 0.9320171822373808,
+              "profitWithoutBest5": -2050.3441609506763,
+              "byLayerPnl": {
+                "tail_high_vol": 448.42450236588604,
+                "liquid_low_vol": -540.4134773833167,
+                "liquid_high_vol": -202.12145361285673
+              },
+              "byLayerTrades": {
+                "tail_high_vol": 19,
+                "liquid_low_vol": 11,
+                "liquid_high_vol": 16
+              }
+            },
+            "short": {
+              "trades": 296,
+              "winRate": 0.5135135135135135,
+              "netPnl": 21192.36448998814,
+              "profitFactor": 1.7494083495476966,
+              "profitWithoutBest5": 14182.02156361955,
+              "byLayerPnl": {
+                "liquid_high_vol": 9959.02319231133,
+                "tail_high_vol": 4396.216233323282,
+                "liquid_low_vol": 6837.125064353485
+              },
+              "byLayerTrades": {
+                "liquid_high_vol": 115,
+                "tail_high_vol": 82,
+                "liquid_low_vol": 99
+              }
+            }
+          }
+        ],
+        "allCombinedPositive": true,
+        "allLongPositive": false,
+        "minimumCombinedNetPnl": 10250.329435825966,
+        "minimumLongNetPnl": -746.2690140236814,
+        "minimumLongWithoutBest5": -2490.14780101225,
+        "pass": false
+      },
+      "acceptance": null,
+      "validationPass": false
+    },
+    {
+      "id": "causal_long_q800",
+      "scoreQuantile": 0.8,
+      "modeledFolds": 8,
+      "modelCandidates": 62,
+      "stress": {
+        "trades": 406,
+        "longTrades": 44,
+        "shortTrades": 362,
+        "winRate": 0.49014778325123154,
+        "profitFactor": 1.5357167405286465,
+        "totalReturn": 0.2197795460600258,
+        "maxDrawdown": -0.08742565390110746,
+        "netPnl": 21977.95460600257,
+        "fees": 6094.289959665117,
+        "modelCandidates": 633,
+        "finalSignals": 406,
+        "executedSignals": 406,
+        "maxSymbolContribution": 0.05120497053699482,
+        "profitableLayers": 3,
+        "byLayer": {
+          "liquid_high_vol": 8874.247770902986,
+          "tail_high_vol": 4900.355743585216,
+          "liquid_low_vol": 8203.351091514372
+        },
+        "quarters": [
+          {
+            "startTime": 1640995200000,
+            "endTime": 1648756800000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 59,
+            "oosRows": 0,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1648771200000,
+            "endTime": 1656619200000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 60,
+            "oosRows": 25,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1656633600000,
+            "endTime": 1664568000000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 90,
+            "oosRows": 0,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1664582400000,
+            "endTime": 1672516800000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 90,
+            "oosRows": 74,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1672531200000,
+            "endTime": 1680292800000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 178,
+            "oosRows": 110,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1680307200000,
+            "endTime": 1688155200000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 365,
+            "oosRows": 233,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1688169600000,
+            "endTime": 1696104000000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 663,
+            "oosRows": 167,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1696118400000,
+            "endTime": 1704052800000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 887,
+            "oosRows": 106,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1704067200000,
+            "endTime": 1711915200000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 1029,
+            "oosRows": 36,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1711929600000,
+            "endTime": 1719777600000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 1161,
+            "oosRows": 188,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1719792000000,
+            "endTime": 1727726400000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 1425,
+            "oosRows": 267,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1727740800000,
+            "endTime": 1735675200000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 1915,
+            "oosRows": 439,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1735689600000,
+            "endTime": 1743451200000,
+            "totalReturn": 0.11354733069356904,
+            "trades": 67,
+            "signals": 67,
+            "trainingRows": 2569,
+            "oosRows": 649,
+            "modelCandidates": 172
+          },
+          {
+            "startTime": 1743465600000,
+            "endTime": 1751313600000,
+            "totalReturn": 0.008937152891974165,
+            "trades": 56,
+            "signals": 56,
+            "trainingRows": 3378,
+            "oosRows": 517,
+            "modelCandidates": 79
+          },
+          {
+            "startTime": 1751328000000,
+            "endTime": 1759262400000,
+            "totalReturn": -0.031961886807645556,
+            "trades": 89,
+            "signals": 89,
+            "trainingRows": 3986,
+            "oosRows": 583,
+            "modelCandidates": 146
+          },
+          {
+            "startTime": 1759276800000,
+            "endTime": 1767211200000,
+            "totalReturn": 0.09386552106039359,
+            "trades": 75,
+            "signals": 75,
+            "trainingRows": 4787,
+            "oosRows": 803,
+            "modelCandidates": 83
+          },
+          {
+            "startTime": 1767225600000,
+            "endTime": 1774987200000,
+            "totalReturn": 0.023639520428446303,
+            "trades": 54,
+            "signals": 54,
+            "trainingRows": 5799,
+            "oosRows": 957,
+            "modelCandidates": 56
+          },
+          {
+            "startTime": 1775001600000,
+            "endTime": 1782849600000,
+            "totalReturn": 0.0016249084236095168,
+            "trades": 65,
+            "signals": 65,
+            "trainingRows": 7130,
+            "oosRows": 1024,
+            "modelCandidates": 97
+          }
+        ],
+        "activeStart": 1735689600000,
+        "activeQuarters": 6,
+        "operationalDays": 546.8333333333334,
+        "operationalSignalsPerDay": 0.7424565681194757,
+        "positiveQuarterShare": 0.8333333333333334,
+        "lastFourQuarterReturn": 0.08569678227273347,
+        "longAudit": {
+          "trades": 44,
+          "winRate": 0.5,
+          "netPnl": 273.9035121482345,
+          "profitFactor": 1.0724511201773856,
+          "profitWithoutBest5": -1492.4802722641607,
+          "byLayerPnl": {
+            "tail_high_vol": 1017.0755386297787,
+            "liquid_low_vol": -542.10995302315,
+            "liquid_high_vol": -201.06207345839528
+          },
+          "byLayerTrades": {
+            "tail_high_vol": 17,
+            "liquid_low_vol": 11,
+            "liquid_high_vol": 16
+          }
+        },
+        "shortAudit": {
+          "trades": 362,
+          "winRate": 0.4889502762430939,
+          "netPnl": 21704.051093854378,
+          "profitFactor": 1.5827404552531843,
+          "profitWithoutBest5": 14238.210882499157,
+          "byLayerPnl": {
+            "liquid_high_vol": 9075.309844361384,
+            "tail_high_vol": 3883.280204955438,
+            "liquid_low_vol": 8745.461044537524
+          },
+          "byLayerTrades": {
+            "liquid_high_vol": 125,
+            "tail_high_vol": 97,
+            "liquid_low_vol": 140
+          }
+        }
+      },
+      "extreme": {
+        "trades": 406,
+        "longTrades": 44,
+        "shortTrades": 362,
+        "winRate": 0.4802955665024631,
+        "profitFactor": 1.3974782275031878,
+        "totalReturn": 0.16993708672687413,
+        "maxDrawdown": -0.09472663149096638,
+        "netPnl": 16993.70867268752,
+        "fees": 10647.15237314757,
+        "modelCandidates": 633,
+        "finalSignals": 406,
+        "executedSignals": 406,
+        "maxSymbolContribution": 0.052355549746886644,
+        "profitableLayers": 3,
+        "byLayer": {
+          "liquid_high_vol": 7934.526740282832,
+          "tail_high_vol": 2728.796160822455,
+          "liquid_low_vol": 6330.385771582251
+        },
+        "quarters": [
+          {
+            "startTime": 1640995200000,
+            "endTime": 1648756800000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 59,
+            "oosRows": 0,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1648771200000,
+            "endTime": 1656619200000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 60,
+            "oosRows": 25,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1656633600000,
+            "endTime": 1664568000000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 90,
+            "oosRows": 0,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1664582400000,
+            "endTime": 1672516800000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 90,
+            "oosRows": 74,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1672531200000,
+            "endTime": 1680292800000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 178,
+            "oosRows": 110,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1680307200000,
+            "endTime": 1688155200000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 365,
+            "oosRows": 233,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1688169600000,
+            "endTime": 1696104000000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 663,
+            "oosRows": 167,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1696118400000,
+            "endTime": 1704052800000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 887,
+            "oosRows": 106,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1704067200000,
+            "endTime": 1711915200000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 1029,
+            "oosRows": 36,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1711929600000,
+            "endTime": 1719777600000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 1161,
+            "oosRows": 188,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1719792000000,
+            "endTime": 1727726400000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 1425,
+            "oosRows": 267,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1727740800000,
+            "endTime": 1735675200000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 1915,
+            "oosRows": 439,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1735689600000,
+            "endTime": 1743451200000,
+            "totalReturn": 0.1085589794902635,
+            "trades": 67,
+            "signals": 67,
+            "trainingRows": 2569,
+            "oosRows": 649,
+            "modelCandidates": 172
+          },
+          {
+            "startTime": 1743465600000,
+            "endTime": 1751313600000,
+            "totalReturn": 0.003545211536875481,
+            "trades": 56,
+            "signals": 56,
+            "trainingRows": 3378,
+            "oosRows": 517,
+            "modelCandidates": 79
+          },
+          {
+            "startTime": 1751328000000,
+            "endTime": 1759262400000,
+            "totalReturn": -0.0403293804629008,
+            "trades": 89,
+            "signals": 89,
+            "trainingRows": 3986,
+            "oosRows": 583,
+            "modelCandidates": 146
+          },
+          {
+            "startTime": 1759276800000,
+            "endTime": 1767211200000,
+            "totalReturn": 0.08534780209249115,
+            "trades": 75,
+            "signals": 75,
+            "trainingRows": 4787,
+            "oosRows": 803,
+            "modelCandidates": 83
+          },
+          {
+            "startTime": 1767225600000,
+            "endTime": 1774987200000,
+            "totalReturn": 0.01610725218568021,
+            "trades": 54,
+            "signals": 54,
+            "trainingRows": 5799,
+            "oosRows": 957,
+            "modelCandidates": 56
+          },
+          {
+            "startTime": 1775001600000,
+            "endTime": 1782849600000,
+            "totalReturn": -0.006343952872396974,
+            "trades": 65,
+            "signals": 65,
+            "trainingRows": 7130,
+            "oosRows": 1024,
+            "modelCandidates": 97
+          }
+        ],
+        "activeStart": 1735689600000,
+        "activeQuarters": 6,
+        "operationalDays": 546.8333333333334,
+        "operationalSignalsPerDay": 0.7424565681194757,
+        "positiveQuarterShare": 0.6666666666666666,
+        "lastFourQuarterReturn": 0.051639187698428124,
+        "longAudit": {
+          "trades": 44,
+          "winRate": 0.5,
+          "netPnl": -256.44998508200774,
+          "profitFactor": 0.9356274370135903,
+          "profitWithoutBest5": -1939.908675968984,
+          "byLayerPnl": {
+            "tail_high_vol": 700.2136292926925,
+            "liquid_low_vol": -643.4394763801744,
+            "liquid_high_vol": -313.22413799452545
+          },
+          "byLayerTrades": {
+            "tail_high_vol": 17,
+            "liquid_low_vol": 11,
+            "liquid_high_vol": 16
+          }
+        },
+        "shortAudit": {
+          "trades": 362,
+          "winRate": 0.47790055248618785,
+          "netPnl": 17250.158657769494,
+          "profitFactor": 1.4449360820544233,
+          "profitWithoutBest5": 9996.064367648,
+          "byLayerPnl": {
+            "liquid_high_vol": 8247.750878277355,
+            "tail_high_vol": 2028.5825315297636,
+            "liquid_low_vol": 6973.825247962423
+          },
+          "byLayerTrades": {
+            "liquid_high_vol": 125,
+            "tail_high_vol": 97,
+            "liquid_low_vol": 140
+          }
+        }
+      },
+      "versusV124": {
+        "stressReturnDelta": -0.06559513926837846,
+        "extremeReturnDelta": -0.050791029895203677,
+        "frequencyDelta": -0.09875038098140809,
+        "headlineSuperior": false
+      },
+      "leaveOneQuarterOut": {
+        "rows": [
+          {
+            "excludedQuarter": "2025-01-01",
+            "combined": {
+              "trades": 339,
+              "netPnl": 10623.221536645604,
+              "profitFactor": 1.2924407409799266,
+              "profitWithoutBest": -1743.2959680855392
+            },
+            "long": {
+              "trades": 41,
+              "winRate": 0.4878048780487805,
+              "netPnl": -9.521282172586325,
+              "profitFactor": 0.9972904531134991,
+              "profitWithoutBest5": -1662.0701900200056,
+              "byLayerPnl": {
+                "liquid_high_vol": -201.06207345839528,
+                "tail_high_vol": 467.09821164565585,
+                "liquid_low_vol": -275.557420359848
+              },
+              "byLayerTrades": {
+                "liquid_high_vol": 16,
+                "tail_high_vol": 15,
+                "liquid_low_vol": 10
+              }
+            },
+            "short": {
+              "trades": 298,
+              "winRate": 0.4597315436241611,
+              "netPnl": 10632.742818818188,
+              "profitFactor": 1.3240495465707418,
+              "profitWithoutBest5": 3166.902607462971,
+              "byLayerPnl": {
+                "tail_high_vol": 771.3455780143488,
+                "liquid_high_vol": 2558.7086567083697,
+                "liquid_low_vol": 7302.68858409546
+              },
+              "byLayerTrades": {
+                "tail_high_vol": 88,
+                "liquid_high_vol": 78,
+                "liquid_low_vol": 132
+              }
+            }
+          },
+          {
+            "excludedQuarter": "2025-04-01",
+            "combined": {
+              "trades": 350,
+              "netPnl": 20982.760331316833,
+              "profitFactor": 1.5788758652985844,
+              "profitWithoutBest": 8541.800620844684
+            },
+            "long": {
+              "trades": 21,
+              "winRate": 0.42857142857142855,
+              "netPnl": 185.54873736979266,
+              "profitFactor": 1.1053107472344659,
+              "profitWithoutBest5": -1352.174072993645,
+              "byLayerPnl": {
+                "tail_high_vol": 698.243023933334,
+                "liquid_low_vol": -459.49367103301427,
+                "liquid_high_vol": -53.200615530527045
+              },
+              "byLayerTrades": {
+                "tail_high_vol": 5,
+                "liquid_low_vol": 9,
+                "liquid_high_vol": 7
+              }
+            },
+            "short": {
+              "trades": 329,
+              "winRate": 0.48936170212765956,
+              "netPnl": 20797.211593947035,
+              "profitFactor": 1.6030710176949563,
+              "profitWithoutBest5": 13331.3713825918,
+              "byLayerPnl": {
+                "liquid_high_vol": 8802.180703241133,
+                "tail_high_vol": 3897.8292074013384,
+                "liquid_low_vol": 8097.201683304522
+              },
+              "byLayerTrades": {
+                "liquid_high_vol": 107,
+                "tail_high_vol": 90,
+                "liquid_low_vol": 132
+              }
+            }
+          },
+          {
+            "excludedQuarter": "2025-07-01",
+            "combined": {
+              "trades": 317,
+              "netPnl": 25568.870266620204,
+              "profitFactor": 1.8641834785664122,
+              "profitWithoutBest": 13127.910556148041
+            },
+            "long": {
+              "trades": 29,
+              "winRate": 0.5862068965517241,
+              "netPnl": 827.2361513906651,
+              "profitFactor": 1.3611386879785266,
+              "profitWithoutBest5": -715.2303873376069,
+              "byLayerPnl": {
+                "tail_high_vol": 1066.4729913395252,
+                "liquid_low_vol": -349.1688146534376,
+                "liquid_high_vol": 109.93197470457693
+              },
+              "byLayerTrades": {
+                "tail_high_vol": 15,
+                "liquid_low_vol": 3,
+                "liquid_high_vol": 11
+              }
+            },
+            "short": {
+              "trades": 288,
+              "winRate": 0.5208333333333334,
+              "netPnl": 24741.634115229546,
+              "profitFactor": 1.9063970654895728,
+              "profitWithoutBest5": 17275.793903874295,
+              "byLayerPnl": {
+                "liquid_high_vol": 6867.5744698477265,
+                "tail_high_vol": 6671.647285000321,
+                "liquid_low_vol": 11202.412360381453
+              },
+              "byLayerTrades": {
+                "liquid_high_vol": 99,
+                "tail_high_vol": 76,
+                "liquid_low_vol": 113
+              }
+            }
+          },
+          {
+            "excludedQuarter": "2025-10-01",
+            "combined": {
+              "trades": 331,
+              "netPnl": 11769.233304324394,
+              "profitFactor": 1.3412497002174442,
+              "profitWithoutBest": 2616.1098732104892
+            },
+            "long": {
+              "trades": 41,
+              "winRate": 0.4878048780487805,
+              "netPnl": -181.55307014316833,
+              "profitFactor": 0.9519072341655932,
+              "profitWithoutBest5": -1935.4917935592496,
+              "byLayerPnl": {
+                "tail_high_vol": 819.4123889708212,
+                "liquid_low_vol": -542.10995302315,
+                "liquid_high_vol": -458.8555060908404
+              },
+              "byLayerTrades": {
+                "tail_high_vol": 16,
+                "liquid_low_vol": 11,
+                "liquid_high_vol": 14
+              }
+            },
+            "short": {
+              "trades": 290,
+              "winRate": 0.47586206896551725,
+              "netPnl": 11950.786374467569,
+              "profitFactor": 1.389104485570181,
+              "profitWithoutBest5": 6571.302290199967,
+              "byLayerPnl": {
+                "liquid_high_vol": 8227.818705739186,
+                "tail_high_vol": 838.7115799375056,
+                "liquid_low_vol": 2884.2560887908726
+              },
+              "byLayerTrades": {
+                "liquid_high_vol": 110,
+                "tail_high_vol": 76,
+                "liquid_low_vol": 104
+              }
+            }
+          },
+          {
+            "excludedQuarter": "2026-01-01",
+            "combined": {
+              "trades": 352,
+              "netPnl": 19165.614451775305,
+              "profitFactor": 1.5290201454740993,
+              "profitWithoutBest": 6724.6547413031485
+            },
+            "long": {
+              "trades": 44,
+              "winRate": 0.5,
+              "netPnl": 273.9035121482345,
+              "profitFactor": 1.0724511201773856,
+              "profitWithoutBest5": -1492.4802722641607,
+              "byLayerPnl": {
+                "tail_high_vol": 1017.0755386297787,
+                "liquid_low_vol": -542.10995302315,
+                "liquid_high_vol": -201.06207345839528
+              },
+              "byLayerTrades": {
+                "tail_high_vol": 17,
+                "liquid_low_vol": 11,
+                "liquid_high_vol": 16
+              }
+            },
+            "short": {
+              "trades": 308,
+              "winRate": 0.474025974025974,
+              "netPnl": 18891.71093962707,
+              "profitFactor": 1.5822151906092181,
+              "profitWithoutBest5": 11425.870728271848,
+              "byLayerPnl": {
+                "liquid_high_vol": 8712.19892841115,
+                "tail_high_vol": 2821.7422053903138,
+                "liquid_low_vol": 7357.769805825581
+              },
+              "byLayerTrades": {
+                "liquid_high_vol": 115,
+                "tail_high_vol": 73,
+                "liquid_low_vol": 120
+              }
+            }
+          },
+          {
+            "excludedQuarter": "2026-04-01",
+            "combined": {
+              "trades": 341,
+              "netPnl": 21780.073139330678,
+              "profitFactor": 1.6753786171493386,
+              "profitWithoutBest": 10779.994972390019
+            },
+            "long": {
+              "trades": 44,
+              "winRate": 0.5,
+              "netPnl": 273.9035121482345,
+              "profitFactor": 1.0724511201773856,
+              "profitWithoutBest5": -1492.4802722641607,
+              "byLayerPnl": {
+                "tail_high_vol": 1017.0755386297787,
+                "liquid_low_vol": -542.10995302315,
+                "liquid_high_vol": -201.06207345839528
+              },
+              "byLayerTrades": {
+                "tail_high_vol": 17,
+                "liquid_low_vol": 11,
+                "liquid_high_vol": 16
+              }
+            },
+            "short": {
+              "trades": 297,
+              "winRate": 0.5151515151515151,
+              "netPnl": 21506.169627182426,
+              "profitFactor": 1.7554464770290048,
+              "profitWithoutBest5": 14444.694000977897,
+              "byLayerPnl": {
+                "liquid_high_vol": 10208.067757859351,
+                "tail_high_vol": 4415.125169033356,
+                "liquid_low_vol": 6882.9767002897415
+              },
+              "byLayerTrades": {
+                "liquid_high_vol": 116,
+                "tail_high_vol": 82,
+                "liquid_low_vol": 99
+              }
+            }
+          }
+        ],
+        "allCombinedPositive": true,
+        "allLongPositive": false,
+        "minimumCombinedNetPnl": 10623.221536645604,
+        "minimumLongNetPnl": -181.55307014316833,
+        "minimumLongWithoutBest5": -1935.4917935592496,
+        "pass": false
+      },
+      "acceptance": null,
+      "validationPass": false
+    },
+    {
+      "id": "causal_long_q900",
+      "scoreQuantile": 0.9,
+      "modeledFolds": 8,
+      "modelCandidates": 20,
+      "stress": {
+        "trades": 381,
+        "longTrades": 19,
+        "shortTrades": 362,
+        "winRate": 0.49868766404199477,
+        "profitFactor": 1.6143767127439992,
+        "totalReturn": 0.23507684666733186,
+        "maxDrawdown": -0.08236798659287659,
+        "netPnl": 23507.684666733116,
+        "fees": 5782.768252115194,
+        "modelCandidates": 591,
+        "finalSignals": 381,
+        "executedSignals": 381,
+        "maxSymbolContribution": 0.052790859609987556,
+        "profitableLayers": 3,
+        "byLayer": {
+          "liquid_high_vol": 9549.142936842818,
+          "tail_high_vol": 5090.41047909021,
+          "liquid_low_vol": 8868.131250800085
+        },
+        "quarters": [
+          {
+            "startTime": 1640995200000,
+            "endTime": 1648756800000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 59,
+            "oosRows": 0,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1648771200000,
+            "endTime": 1656619200000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 60,
+            "oosRows": 25,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1656633600000,
+            "endTime": 1664568000000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 90,
+            "oosRows": 0,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1664582400000,
+            "endTime": 1672516800000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 90,
+            "oosRows": 74,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1672531200000,
+            "endTime": 1680292800000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 178,
+            "oosRows": 110,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1680307200000,
+            "endTime": 1688155200000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 365,
+            "oosRows": 233,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1688169600000,
+            "endTime": 1696104000000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 663,
+            "oosRows": 167,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1696118400000,
+            "endTime": 1704052800000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 887,
+            "oosRows": 106,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1704067200000,
+            "endTime": 1711915200000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 1029,
+            "oosRows": 36,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1711929600000,
+            "endTime": 1719777600000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 1161,
+            "oosRows": 188,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1719792000000,
+            "endTime": 1727726400000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 1425,
+            "oosRows": 267,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1727740800000,
+            "endTime": 1735675200000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 1915,
+            "oosRows": 439,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1735689600000,
+            "endTime": 1743451200000,
+            "totalReturn": 0.110486375107826,
+            "trades": 64,
+            "signals": 64,
+            "trainingRows": 2569,
+            "oosRows": 649,
+            "modelCandidates": 169
+          },
+          {
+            "startTime": 1743465600000,
+            "endTime": 1751313600000,
+            "totalReturn": 0.018760023392795366,
+            "trades": 47,
+            "signals": 47,
+            "trainingRows": 3378,
+            "oosRows": 517,
+            "modelCandidates": 59
+          },
+          {
+            "startTime": 1751328000000,
+            "endTime": 1759262400000,
+            "totalReturn": -0.026596828345127776,
+            "trades": 76,
+            "signals": 76,
+            "trainingRows": 3986,
+            "oosRows": 583,
+            "modelCandidates": 127
+          },
+          {
+            "startTime": 1759276800000,
+            "endTime": 1767211200000,
+            "totalReturn": 0.09386552106039447,
+            "trades": 75,
+            "signals": 75,
+            "trainingRows": 4787,
+            "oosRows": 803,
+            "modelCandidates": 83
+          },
+          {
+            "startTime": 1767225600000,
+            "endTime": 1774987200000,
+            "totalReturn": 0.02363952042844697,
+            "trades": 54,
+            "signals": 54,
+            "trainingRows": 5799,
+            "oosRows": 957,
+            "modelCandidates": 56
+          },
+          {
+            "startTime": 1775001600000,
+            "endTime": 1782849600000,
+            "totalReturn": 0.001624908423609961,
+            "trades": 65,
+            "signals": 65,
+            "trainingRows": 7130,
+            "oosRows": 1024,
+            "modelCandidates": 97
+          }
+        ],
+        "activeStart": 1735689600000,
+        "activeQuarters": 6,
+        "operationalDays": 546.8333333333334,
+        "operationalSignalsPerDay": 0.6967387991466016,
+        "positiveQuarterShare": 0.8333333333333334,
+        "lastFourQuarterReturn": 0.09171392832316472,
+        "longAudit": {
+          "trades": 19,
+          "winRate": 0.6842105263157895,
+          "netPnl": 1266.1353183276658,
+          "profitFactor": 2.956778528885548,
+          "profitWithoutBest5": 171.62346857270046,
+          "byLayerPnl": {
+            "liquid_high_vol": 333.32317078944203,
+            "liquid_low_vol": 36.42708804129421,
+            "tail_high_vol": 896.3850594969292
+          },
+          "byLayerTrades": {
+            "liquid_high_vol": 8,
+            "liquid_low_vol": 3,
+            "tail_high_vol": 8
+          }
+        },
+        "shortAudit": {
+          "trades": 362,
+          "winRate": 0.4889502762430939,
+          "netPnl": 22241.549348405424,
+          "profitFactor": 1.5912851709867113,
+          "profitWithoutBest5": 14682.079757570875,
+          "byLayerPnl": {
+            "liquid_high_vol": 9215.819766053377,
+            "tail_high_vol": 4194.0254195932785,
+            "liquid_low_vol": 8831.70416275879
+          },
+          "byLayerTrades": {
+            "liquid_high_vol": 124,
+            "tail_high_vol": 98,
+            "liquid_low_vol": 140
+          }
+        }
+      },
+      "extreme": {
+        "trades": 381,
+        "longTrades": 19,
+        "shortTrades": 362,
+        "winRate": 0.4881889763779528,
+        "profitFactor": 1.4704040846503046,
+        "totalReturn": 0.1878618106761789,
+        "maxDrawdown": -0.08875359852477449,
+        "netPnl": 18786.181067617774,
+        "fees": 10107.32795885715,
+        "modelCandidates": 591,
+        "finalSignals": 381,
+        "executedSignals": 381,
+        "maxSymbolContribution": 0.05401430897990234,
+        "profitableLayers": 3,
+        "byLayer": {
+          "liquid_high_vol": 8666.13271474051,
+          "tail_high_vol": 3053.7120037972372,
+          "liquid_low_vol": 7066.336349080028
+        },
+        "quarters": [
+          {
+            "startTime": 1640995200000,
+            "endTime": 1648756800000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 59,
+            "oosRows": 0,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1648771200000,
+            "endTime": 1656619200000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 60,
+            "oosRows": 25,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1656633600000,
+            "endTime": 1664568000000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 90,
+            "oosRows": 0,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1664582400000,
+            "endTime": 1672516800000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 90,
+            "oosRows": 74,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1672531200000,
+            "endTime": 1680292800000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 178,
+            "oosRows": 110,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1680307200000,
+            "endTime": 1688155200000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 365,
+            "oosRows": 233,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1688169600000,
+            "endTime": 1696104000000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 663,
+            "oosRows": 167,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1696118400000,
+            "endTime": 1704052800000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 887,
+            "oosRows": 106,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1704067200000,
+            "endTime": 1711915200000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 1029,
+            "oosRows": 36,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1711929600000,
+            "endTime": 1719777600000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 1161,
+            "oosRows": 188,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1719792000000,
+            "endTime": 1727726400000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 1425,
+            "oosRows": 267,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1727740800000,
+            "endTime": 1735675200000,
+            "totalReturn": 0,
+            "trades": 0,
+            "signals": 0,
+            "trainingRows": 1915,
+            "oosRows": 439,
+            "modelCandidates": 0
+          },
+          {
+            "startTime": 1735689600000,
+            "endTime": 1743451200000,
+            "totalReturn": 0.10593891948077272,
+            "trades": 64,
+            "signals": 64,
+            "trainingRows": 2569,
+            "oosRows": 649,
+            "modelCandidates": 169
+          },
+          {
+            "startTime": 1743465600000,
+            "endTime": 1751313600000,
+            "totalReturn": 0.014639897279421277,
+            "trades": 47,
+            "signals": 47,
+            "trainingRows": 3378,
+            "oosRows": 517,
+            "modelCandidates": 59
+          },
+          {
+            "startTime": 1751328000000,
+            "endTime": 1759262400000,
+            "totalReturn": -0.03399743207407191,
+            "trades": 76,
+            "signals": 76,
+            "trainingRows": 3986,
+            "oosRows": 583,
+            "modelCandidates": 127
+          },
+          {
+            "startTime": 1759276800000,
+            "endTime": 1767211200000,
+            "totalReturn": 0.08534780209249204,
+            "trades": 75,
+            "signals": 75,
+            "trainingRows": 4787,
+            "oosRows": 803,
+            "modelCandidates": 83
+          },
+          {
+            "startTime": 1767225600000,
+            "endTime": 1774987200000,
+            "totalReturn": 0.01610725218568132,
+            "trades": 54,
+            "signals": 54,
+            "trainingRows": 5799,
+            "oosRows": 957,
+            "modelCandidates": 56
+          },
+          {
+            "startTime": 1775001600000,
+            "endTime": 1782849600000,
+            "totalReturn": -0.006343952872397751,
+            "trades": 65,
+            "signals": 65,
+            "trainingRows": 7130,
+            "oosRows": 1024,
+            "modelCandidates": 97
+          }
+        ],
+        "activeStart": 1735689600000,
+        "activeQuarters": 6,
+        "operationalDays": 546.8333333333334,
+        "operationalSignalsPerDay": 0.6967387991466016,
+        "positiveQuarterShare": 0.6666666666666666,
+        "lastFourQuarterReturn": 0.05857794869059996,
+        "longAudit": {
+          "trades": 19,
+          "winRate": 0.6842105263157895,
+          "netPnl": 1033.6450089514215,
+          "profitFactor": 2.4999561256127736,
+          "profitWithoutBest5": 33.10397085011982,
+          "byLayerPnl": {
+            "liquid_high_vol": 271.341809631375,
+            "liquid_low_vol": 10.752379824963043,
+            "tail_high_vol": 751.5508194950834
+          },
+          "byLayerTrades": {
+            "liquid_high_vol": 8,
+            "liquid_low_vol": 3,
+            "tail_high_vol": 8
+          }
+        },
+        "shortAudit": {
+          "trades": 362,
+          "winRate": 0.47790055248618785,
+          "netPnl": 17752.536058666345,
+          "profitFactor": 1.4523268048056452,
+          "profitWithoutBest5": 10387.301059247058,
+          "byLayerPnl": {
+            "liquid_high_vol": 8394.790905109134,
+            "tail_high_vol": 2302.161184302152,
+            "liquid_low_vol": 7055.583969255064
+          },
+          "byLayerTrades": {
+            "liquid_high_vol": 124,
+            "tail_high_vol": 98,
+            "liquid_low_vol": 140
+          }
+        }
+      },
+      "versusV124": {
+        "stressReturnDelta": -0.0502978386610724,
+        "extremeReturnDelta": -0.0328663059458989,
+        "frequencyDelta": -0.14446814995428214,
+        "headlineSuperior": false
+      },
+      "leaveOneQuarterOut": {
+        "rows": [
+          {
+            "excludedQuarter": "2025-01-01",
+            "combined": {
+              "trades": 317,
+              "netPnl": 12459.047155950448,
+              "profitFactor": 1.3681745657478395,
+              "profitWithoutBest": -62.559304277940726
+            },
+            "long": {
+              "trades": 19,
+              "winRate": 0.6842105263157895,
+              "netPnl": 1266.1353183276658,
+              "profitFactor": 2.956778528885548,
+              "profitWithoutBest5": 171.62346857270046,
+              "byLayerPnl": {
+                "liquid_high_vol": 333.32317078944203,
+                "liquid_low_vol": 36.42708804129421,
+                "tail_high_vol": 896.3850594969292
+              },
+              "byLayerTrades": {
+                "liquid_high_vol": 8,
+                "liquid_low_vol": 3,
+                "tail_high_vol": 8
+              }
+            },
+            "short": {
+              "trades": 298,
+              "winRate": 0.4597315436241611,
+              "netPnl": 11192.911837622778,
+              "profitFactor": 1.3372069659823194,
+              "profitWithoutBest5": 3633.442246788237,
+              "byLayerPnl": {
+                "tail_high_vol": 1088.040233972415,
+                "liquid_high_vol": 2711.973960865724,
+                "liquid_low_vol": 7392.89764278465
+              },
+              "byLayerTrades": {
+                "tail_high_vol": 89,
+                "liquid_high_vol": 77,
+                "liquid_low_vol": 132
+              }
+            }
+          },
+          {
+            "excludedQuarter": "2025-04-01",
+            "combined": {
+              "trades": 334,
+              "netPnl": 21424.409629292626,
+              "profitFactor": 1.6083465146479399,
+              "profitWithoutBest": 8840.676725904166
+            },
+            "long": {
+              "trades": 5,
+              "winRate": 0.4,
+              "netPnl": 91.96405043373073,
+              "profitFactor": 1.2454066538236435,
+              "profitWithoutBest5": 0,
+              "byLayerPnl": {
+                "liquid_low_vol": -291.17744719221247,
+                "liquid_high_vol": 182.99944706305874,
+                "tail_high_vol": 200.1420505628844
+              },
+              "byLayerTrades": {
+                "liquid_low_vol": 1,
+                "liquid_high_vol": 3,
+                "tail_high_vol": 1
+              }
+            },
+            "short": {
+              "trades": 329,
+              "winRate": 0.48936170212765956,
+              "netPnl": 21332.445578858897,
+              "profitFactor": 1.6122500182628543,
+              "profitWithoutBest5": 13772.975988024356,
+              "byLayerPnl": {
+                "liquid_high_vol": 8942.641682294463,
+                "tail_high_vol": 4210.30929317093,
+                "liquid_low_vol": 8179.494603393539
+              },
+              "byLayerTrades": {
+                "liquid_high_vol": 106,
+                "tail_high_vol": 91,
+                "liquid_low_vol": 132
+              }
+            }
+          },
+          {
+            "excludedQuarter": "2025-07-01",
+            "combined": {
+              "trades": 305,
+              "netPnl": 26516.63472513431,
+              "profitFactor": 1.9528017713314556,
+              "profitWithoutBest": 13932.901821745834
+            },
+            "long": {
+              "trades": 17,
+              "winRate": 0.7647058823529411,
+              "netPnl": 1635.3397481060658,
+              "profitFactor": 6.885767475783478,
+              "profitWithoutBest5": 540.8278983511005,
+              "byLayerPnl": {
+                "liquid_high_vol": 411.35015337562965,
+                "liquid_low_vol": 327.6045352335067,
+                "tail_high_vol": 896.3850594969292
+              },
+              "byLayerTrades": {
+                "liquid_high_vol": 7,
+                "liquid_low_vol": 2,
+                "tail_high_vol": 8
+              }
+            },
+            "short": {
+              "trades": 288,
+              "winRate": 0.5208333333333334,
+              "netPnl": 24881.294977028243,
+              "profitFactor": 1.9030561605284875,
+              "profitWithoutBest5": 17321.82538619369,
+              "byLayerPnl": {
+                "liquid_high_vol": 6855.84427628649,
+                "tail_high_vol": 6708.787920832258,
+                "liquid_low_vol": 11316.66277990949
+              },
+              "byLayerTrades": {
+                "liquid_high_vol": 99,
+                "tail_high_vol": 76,
+                "liquid_low_vol": 113
+              }
+            }
+          },
+          {
+            "excludedQuarter": "2025-10-01",
+            "combined": {
+              "trades": 306,
+              "netPnl": 13170.935411911754,
+              "profitFactor": 1.416222499123059,
+              "profitWithoutBest": 3951.0409472739893
+            },
+            "long": {
+              "trades": 16,
+              "winRate": 0.6875,
+              "netPnl": 804.966838115535,
+              "profitFactor": 2.2547925824956168,
+              "profitWithoutBest5": -71.90173959688556,
+              "byLayerPnl": {
+                "liquid_high_vol": 72.29674114019573,
+                "liquid_low_vol": 36.42708804129421,
+                "tail_high_vol": 696.2430089340448
+              },
+              "byLayerTrades": {
+                "liquid_high_vol": 6,
+                "liquid_low_vol": 3,
+                "tail_high_vol": 7
+              }
+            },
+            "short": {
+              "trades": 290,
+              "winRate": 0.47586206896551725,
+              "netPnl": 12365.968573796223,
+              "profitFactor": 1.3988705125156728,
+              "profitWithoutBest5": 6932.269524805335,
+              "byLayerPnl": {
+                "liquid_high_vol": 8357.700209573703,
+                "tail_high_vol": 1111.2747463299074,
+                "liquid_low_vol": 2896.9936178926173
+              },
+              "byLayerTrades": {
+                "liquid_high_vol": 109,
+                "tail_high_vol": 77,
+                "liquid_low_vol": 104
+              }
+            }
+          },
+          {
+            "excludedQuarter": "2026-01-01",
+            "combined": {
+              "trades": 327,
+              "netPnl": 20660.074850140823,
+              "profitFactor": 1.6184598137326955,
+              "profitWithoutBest": 8076.341946752359
+            },
+            "long": {
+              "trades": 19,
+              "winRate": 0.6842105263157895,
+              "netPnl": 1266.1353183276658,
+              "profitFactor": 2.956778528885548,
+              "profitWithoutBest5": 171.62346857270046,
+              "byLayerPnl": {
+                "liquid_high_vol": 333.32317078944203,
+                "liquid_low_vol": 36.42708804129421,
+                "tail_high_vol": 896.3850594969292
+              },
+              "byLayerTrades": {
+                "liquid_high_vol": 8,
+                "liquid_low_vol": 3,
+                "tail_high_vol": 8
+              }
+            },
+            "short": {
+              "trades": 308,
+              "winRate": 0.474025974025974,
+              "netPnl": 19393.939531813157,
+              "profitFactor": 1.5920252473418555,
+              "profitWithoutBest5": 11834.469940978608,
+              "byLayerPnl": {
+                "liquid_high_vol": 8848.155062615046,
+                "tail_high_vol": 3119.174632534813,
+                "liquid_low_vol": 7426.609836663338
+              },
+              "byLayerTrades": {
+                "liquid_high_vol": 114,
+                "tail_high_vol": 74,
+                "liquid_low_vol": 120
+              }
+            }
+          },
+          {
+            "excludedQuarter": "2026-04-01",
+            "combined": {
+              "trades": 316,
+              "netPnl": 23307.321561235505,
+              "profitFactor": 1.7934151670449936,
+              "profitWithoutBest": 12206.28465227637
+            },
+            "long": {
+              "trades": 19,
+              "winRate": 0.6842105263157895,
+              "netPnl": 1266.1353183276658,
+              "profitFactor": 2.956778528885548,
+              "profitWithoutBest5": 171.62346857270046,
+              "byLayerPnl": {
+                "liquid_high_vol": 333.32317078944203,
+                "liquid_low_vol": 36.42708804129421,
+                "tail_high_vol": 896.3850594969292
+              },
+              "byLayerTrades": {
+                "liquid_high_vol": 8,
+                "liquid_low_vol": 3,
+                "tail_high_vol": 8
+              }
+            },
+            "short": {
+              "trades": 297,
+              "winRate": 0.5151515151515151,
+              "netPnl": 22041.186242907843,
+              "profitFactor": 1.767213139480418,
+              "profitWithoutBest5": 14891.152388510272,
+              "byLayerPnl": {
+                "liquid_high_vol": 10362.783638631452,
+                "tail_high_vol": 4732.540271126074,
+                "liquid_low_vol": 6945.8623331503195
+              },
+              "byLayerTrades": {
+                "liquid_high_vol": 115,
+                "tail_high_vol": 83,
+                "liquid_low_vol": 99
+              }
+            }
+          }
+        ],
+        "allCombinedPositive": true,
+        "allLongPositive": false,
+        "minimumCombinedNetPnl": 12459.047155950448,
+        "minimumLongNetPnl": 91.96405043373073,
+        "minimumLongWithoutBest5": -71.90173959688556,
+        "pass": false
+      },
+      "acceptance": null,
+      "validationPass": false
+    }
+  ],
+  "bestValidatedCandidate": null,
+  "validationPass": false,
+  "researchStatus": "NO_V14_CAUSAL_REVERSAL_SELECTOR_STRICTLY_SUPERIOR_TO_V12_4",
+  "nextAction": "the reversal edge is not sufficiently predictable from causal event features; do not increase live risk",
+  "caveats": [
+    "The feature set and quantile grid are evaluated on already exposed history.",
+    "Causal walk-forward construction prevents future labels from entering each fold but does not create independent evidence.",
+    "No historical result guarantees future profitability or authorizes live trading."
+  ]
+}

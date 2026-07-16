@@ -1,0 +1,37 @@
+node_modules/
+.npm-cache/
+.tools/
+.vercel/
+.env
+.env.*
+!.env.example
+
+# Local research data and generated artifacts
+work/binance_medium_frequency/v5c_data/
+work/binance_medium_frequency/all_perpetuals_data/
+work/binance_backtest/
+work/**/data/
+work/**/*_package_*/
+work/**/*_verified_package/
+work/**/package_final*/
+work/binance_medium_frequency/*development-results.json
+work/binance_medium_frequency/*frozen-params.json
+work/binance_medium_frequency/final-run.lock
+work/binance_medium_frequency/forward_candidate_v*.json
+!work/binance_medium_frequency/forward_candidate_v11.json
+outputs/*
+!outputs/binance_all_perpetuals_v11_results.json
+!outputs/binance_all_perpetuals_v124_reversal_capacity_research.json
+!outputs/binance_all_perpetuals_v125_reversal_robustness.json
+!outputs/binance_all_perpetuals_v126_predeclared_candidate_comparison.json
+!outputs/binance_all_perpetuals_v13_capacity_diversification.json
+!outputs/binance_all_perpetuals_v131_q200_capacity.json
+!outputs/binance_all_perpetuals_v14_causal_reversal_selector.json
+!outputs/binance_all_perpetuals_v141_eligible_layer_selector.json
+*.zip
+*.csv
+*.tmp
+
+# OS/editor
+.DS_Store
+Thumbs.db

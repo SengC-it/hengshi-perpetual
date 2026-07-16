@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="dark">
+    <title>衡势 Quant｜永续合约影子验证</title>
+    <style>
+      :root {
+        --bg: #07110f;
+        --panel: #0d1b17;
+        --line: #1c3a31;
+        --text: #ecf7f2;
+        --muted: #8eaaa0;
+        --green: #62e6ad;
+        --red: #ff7b82;
+        --amber: #ffc764;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        color: var(--text);
+        background:
+          radial-gradient(circle at 15% 0%, rgba(46, 155, 112, .18), transparent 30rem),
+          linear-gradient(180deg, #08130f, var(--bg));
+        font: 15px/1.55 Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+      }
+      main { width: min(1180px, calc(100% - 32px)); margin: 0 auto; padding: 48px 0 72px; }
+      header { display: flex; justify-content: space-between; gap: 24px; align-items: flex-start; margin-bottom: 32px; }
+      h1 { margin: 0; font-size: clamp(32px, 6vw, 64px); letter-spacing: -.05em; }
+      h1 span { color: var(--green); }
+      .subtitle { color: var(--muted); max-width: 680px; margin: 8px 0 0; }
+      .lock {
+        border: 1px solid rgba(255, 199, 100, .45);
+        color: var(--amber);
+        background: rgba(255, 199, 100, .08);
+        padding: 8px 12px;
+        border-radius: 999px;
+        white-space: nowrap;
+        font-weight: 700;
+      }
+      .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+      .card, .panel {
+        background: linear-gradient(180deg, rgba(16, 34, 29, .94), rgba(10, 24, 20, .94));
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        box-shadow: 0 24px 80px rgba(0, 0, 0, .2);
+      }
+      .card { padding: 20px; }
+      .label { color: var(--muted); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+      .value { font-size: 27px; font-weight: 750; margin-top: 8px; }
+      .panel { margin-top: 16px; padding: 22px; overflow: hidden; }
+      .panel h2 { margin: 0 0 16px; font-size: 18px; }
+      table { width: 100%; border-collapse: collapse; }
+      th, td { text-align: left; padding: 12px 10px; border-bottom: 1px solid rgba(28, 58, 49, .65); white-space: nowrap; }
+      th { color: var(--muted); font-size: 12px; font-weight: 600; }
+      .long { color: var(--green); }
+      .short { color: var(--red); }
+      .empty { color: var(--muted); padding: 26px 10px; text-align: center; }
+      .status { margin-top: 16px; color: var(--muted); }
+      footer { color: var(--muted); margin-top: 28px; font-size: 13px; }
+      @media (max-width: 820px) {
+        header { display: block; }
+        .lock { display: inline-block; margin-top: 18px; }
+        .grid { grid-template-columns: repeat(2, 1fr); }
+        .table-wrap { overflow-x: auto; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div>
+          <h1>衡势 <span>Quant</span></h1>
+          <p class="subtitle">币安永续合约 V12.4 因果前瞻影子系统。每根4小时K线收盘后使用当时可见数据生成信号，记录模拟持仓、成本和退出结果。</p>
+        </div>
+        <div class="lock">PAPER ONLY · 禁止真实下单</div>
+      </header>
+
+      <section class="grid">
+        <article class="card"><div class="label">累计收益</div><div class="value" id="return">—</div></article>
+        <article class="card"><div class="label">利润因子</div><div class="value" id="pf">—</div></article>
+        <article class="card"><div class="label">最大回撤</div><div class="value" id="dd">—</div></article>
+        <article class="card"><div class="label">已完成交易</div><div class="value" id="trades">—</div></article>
+      </section>
+
+      <section class="panel">
+        <h2>最近信号</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>时间 UTC</th><th>合约</th><th>方向</th><th>分层</th><th>分数</th><th>模拟入场</th><th>止损</th></tr></thead>
+            <tbody id="signals"><tr><td colspan="7" class="empty">正在连接 Supabase…</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>扫描状态</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>K线 UTC</th><th>状态</th><th>市场覆盖</th><th>候选</th><th>新信号</th><th>邮件</th></tr></thead>
+            <tbody id="runs"><tr><td colspan="6" class="empty">暂无扫描记录</td></tr></tbody>
+          </table>
+        </div>
+        <div class="status" id="status"></div>
+      </section>
+
+      <footer>历史回测不保证未来盈利。系统不包含交易所密钥或下单接口，只有完成至少180天独立前瞻验证后才重新评估实盘价值。</footer>
+    </main>
+    <script>
+      const pct = value => Number.isFinite(value) ? `${(value * 100).toFixed(2)}%` : '—';
+      const num = value => Number.isFinite(value) ? value.toFixed(2) : '—';
+      const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+      async function load() {
+        const status = document.querySelector('#status');
+        try {
+          const response = await fetch('/api/status', { cache: 'no-store' });
+          const data = await response.json();
+          if (!response.ok) throw new Error(data.status || data.error || `HTTP ${response.status}`);
+          document.querySelector('#return').textContent = pct(data.summary.totalReturn);
+          document.querySelector('#pf').textContent = data.summary.profitFactor == null ? '—' : num(data.summary.profitFactor);
+          document.querySelector('#dd').textContent = pct(data.summary.maxDrawdown);
+          document.querySelector('#trades').textContent = data.summary.trades;
+          document.querySelector('#signals').innerHTML = data.signals.length ? data.signals.map(row => `
+            <tr>
+              <td>${esc(new Date(row.signal_time).toISOString().slice(0, 16).replace('T', ' '))}</td>
+              <td>${esc(row.symbol)}</td>
+              <td class="${row.side === 1 ? 'long' : 'short'}">${row.side === 1 ? '多' : '空'}</td>
+              <td>${esc(row.layer)}</td>
+              <td>${Number(row.score).toFixed(4)}</td>
+              <td>${Number(row.entry_price).toPrecision(8)}</td>
+              <td>${Number(row.stop_price).toPrecision(8)}</td>
+            </tr>`).join('') : '<tr><td colspan="7" class="empty">独立前瞻期尚无信号</td></tr>';
+          document.querySelector('#runs').innerHTML = data.runs.length ? data.runs.map(row => `
+            <tr>
+              <td>${esc(new Date(row.bar_time).toISOString().slice(0, 16).replace('T', ' '))}</td>
+              <td>${esc(row.status)}</td>
+              <td>${row.symbols_scanned ?? 0}/${row.symbols_requested ?? 0}</td>
+              <td>${row.qualified_candidates ?? 0}</td>
+              <td>${row.signals_created ?? 0}</td>
+              <td>${esc(row.email_status ?? '—')}</td>
+            </tr>`).join('') : '<tr><td colspan="6" class="empty">独立前瞻扫描尚未开始</td></tr>';
+          status.textContent = `${data.strategy.version} · 有效期 ${data.strategy.validFrom.slice(0, 10)} 至 ${data.strategy.validThrough.slice(0, 10)} · 实盘下单：关闭`;
+        } catch (error) {
+          status.textContent = `等待部署配置：${error.message}`;
+          document.querySelector('#signals').innerHTML = '<tr><td colspan="7" class="empty">Supabase 尚未完成连接</td></tr>';
+        }
+      }
+      load();
+      setInterval(load, 60000);
+    </script>
+  </body>
+</html>

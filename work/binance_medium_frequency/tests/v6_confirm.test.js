@@ -1,0 +1,2 @@
+const test=require('node:test'),assert=require('node:assert/strict');const {confirm}=require('../v6_confirm_events');
+test('V6 keeps original OI and directional taker thresholds frozen',()=>{assert.equal(confirm({side:1},{oiChange24h:.02,takerRatio:1.1}),true);assert.equal(confirm({side:1},{oiChange24h:.0199,takerRatio:2}),false);assert.equal(confirm({side:-1},{oiChange24h:.02,takerRatio:.9}),true);assert.equal(confirm({side:-1},{oiChange24h:.02,takerRatio:.901}),false);});
