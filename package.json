@@ -5,7 +5,7 @@
   "type": "module",
   "description": "衡势 Quant：币安永续合约 V12.4 因果前瞻影子验证系统",
   "engines": {
-    "node": ">=22"
+    "node": "22.x"
   },
   "scripts": {
     "test": "node --test --test-isolation=none tests/*.test.js"
