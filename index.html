@@ -59,6 +59,7 @@
       .short { color: var(--red); }
       .empty { color: var(--muted); padding: 26px 10px; text-align: center; }
       .status { margin-top: 16px; color: var(--muted); }
+      .note { color: var(--muted); margin: -6px 0 14px; }
       footer { color: var(--muted); margin-top: 28px; font-size: 13px; }
       @media (max-width: 820px) {
         header { display: block; }
@@ -86,11 +87,22 @@
       </section>
 
       <section class="panel">
+        <h2>V12.4 / V12.7 退出规则 A/B</h2>
+        <p class="note">两套纸面仓位使用相同信号、入场价和仓位；V12.7 仅把做空最长持有从72小时延长至96小时。</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>版本</th><th>累计收益</th><th>利润因子</th><th>最大回撤</th><th>完成交易</th><th>未平仓</th><th>做空最长持有</th></tr></thead>
+            <tbody id="exit-comparison"><tr><td colspan="7" class="empty">等待独立前瞻 A/B 数据</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel">
         <h2>最近信号</h2>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>时间（北京时间）</th><th>合约</th><th>方向</th><th>分层</th><th>分数</th><th>模拟入场</th><th>止损</th></tr></thead>
-            <tbody id="signals"><tr><td colspan="7" class="empty">正在连接 Supabase…</td></tr></tbody>
+            <thead><tr><th>时间（北京时间）</th><th>合约</th><th>方向</th><th>分层</th><th>分数</th><th>模拟入场</th><th>初始止损</th><th>参考止盈点位</th><th>实际退出</th><th>最长持有</th></tr></thead>
+            <tbody id="signals"><tr><td colspan="10" class="empty">正在连接 Supabase…</td></tr></tbody>
           </table>
         </div>
       </section>
@@ -122,6 +134,13 @@
         hourCycle: 'h23'
       });
       const beijingTime = value => beijingFormatter.format(new Date(value)).replaceAll('/', '-');
+      const price = value => Number.isFinite(Number(value)) && Number(value) > 0 ? Number(value).toPrecision(8) : '动态更新';
+      const exitInfo = row => {
+        const exit = row.metadata?.exit ?? {};
+        return row.side === 1
+          ? { point: price(exit.referenceEma20), rule: '收盘到EMA20后下根开盘', hours: Number(exit.maxHoldBars) * 4 }
+          : { point: price(exit.referenceProfitPrice), rule: `${exit.trailAtr ?? 3}ATR移动止盈`, hours: Number(exit.maxHoldBars) * 4 };
+      };
       async function load() {
         const status = document.querySelector('#status');
         try {
@@ -132,7 +151,20 @@
           document.querySelector('#pf').textContent = data.summary.profitFactor == null ? '—' : num(data.summary.profitFactor);
           document.querySelector('#dd').textContent = pct(data.summary.maxDrawdown);
           document.querySelector('#trades').textContent = data.summary.trades;
-          document.querySelector('#signals').innerHTML = data.signals.length ? data.signals.map(row => `
+          const comparison = [data.exitComparison.baseline, data.exitComparison.candidate];
+          document.querySelector('#exit-comparison').innerHTML = comparison.map(row => `
+            <tr>
+              <td>${esc(row.version)}</td>
+              <td>${pct(row.summary.totalReturn)}</td>
+              <td>${row.summary.profitFactor == null ? '—' : num(row.summary.profitFactor)}</td>
+              <td>${pct(row.summary.maxDrawdown)}</td>
+              <td>${row.summary.trades}</td>
+              <td>${row.openPositions}</td>
+              <td>${row.maxShortHoldBars * 4}小时</td>
+            </tr>`).join('');
+          document.querySelector('#signals').innerHTML = data.signals.length ? data.signals.map(row => {
+            const exit = exitInfo(row);
+            return `
             <tr>
               <td>${esc(beijingTime(row.signal_time))}</td>
               <td>${esc(row.symbol)}</td>
@@ -141,7 +173,11 @@
               <td>${Number(row.score).toFixed(4)}</td>
               <td>${Number(row.entry_price).toPrecision(8)}</td>
               <td>${Number(row.stop_price).toPrecision(8)}</td>
-            </tr>`).join('') : '<tr><td colspan="7" class="empty">独立前瞻期尚无信号</td></tr>';
+              <td>${esc(exit.point)}</td>
+              <td>${esc(exit.rule)}</td>
+              <td>${Number.isFinite(exit.hours) ? `${exit.hours}小时` : '—'}</td>
+            </tr>`;
+          }).join('') : '<tr><td colspan="10" class="empty">独立前瞻期尚无信号</td></tr>';
           document.querySelector('#runs').innerHTML = data.runs.length ? data.runs.map(row => `
             <tr>
               <td>${esc(beijingTime(row.bar_time))}</td>

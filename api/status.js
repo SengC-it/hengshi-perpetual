@@ -1,4 +1,4 @@
-import { STRATEGY } from '../config/strategy.js';
+import { EXIT_SHADOW, STRATEGY } from '../config/strategy.js';
 import { getDashboardData, isDatabaseConfigured } from '../lib/db.js';
 
 function metrics(trades) {
@@ -36,7 +36,10 @@ export default async function handler(_request, response) {
     });
   }
   try {
-    const data = await getDashboardData(STRATEGY.version);
+    const [data, exitShadowData] = await Promise.all([
+      getDashboardData(STRATEGY.version),
+      getDashboardData(EXIT_SHADOW.version)
+    ]);
     return response.status(200).json({
       ok: true,
       strategy: {
@@ -49,6 +52,20 @@ export default async function handler(_request, response) {
         causalSelection: true
       },
       summary: metrics(data.trades),
+      exitComparison: {
+        baseline: {
+          version: STRATEGY.version,
+          maxShortHoldBars: STRATEGY.short.exit.maxHoldBars,
+          summary: metrics(data.trades),
+          openPositions: data.positions.length
+        },
+        candidate: {
+          version: EXIT_SHADOW.version,
+          maxShortHoldBars: EXIT_SHADOW.short.maxHoldBars,
+          summary: metrics(exitShadowData.trades),
+          openPositions: exitShadowData.positions.length
+        }
+      },
       signals: data.signals,
       runs: data.runs,
       openPositions: data.positions,

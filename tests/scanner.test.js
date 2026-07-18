@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { STRATEGY } from '../config/strategy.js';
+import { EXIT_SHADOW, STRATEGY } from '../config/strategy.js';
 import { FOUR_HOURS } from '../lib/binance.js';
 import {
   MAX_SCAN_DELAY_MS,
@@ -8,6 +8,16 @@ import {
   runShadowScan,
   scanDelayMs
 } from '../lib/scanner.js';
+
+test('V12.7 exit shadow changes only the short maximum holding period', () => {
+  assert.equal(EXIT_SHADOW.baselineVersion, STRATEGY.version);
+  assert.equal(EXIT_SHADOW.liveOrdersEnabled, false);
+  assert.deepEqual(EXIT_SHADOW.long, STRATEGY.long.exit);
+  assert.deepEqual(EXIT_SHADOW.short, {
+    ...STRATEGY.short.exit,
+    maxHoldBars: 24
+  });
+});
 
 test('expected completed bar is the previous four-hour interval', () => {
   const now = Date.parse('2026-07-18T04:05:00Z');

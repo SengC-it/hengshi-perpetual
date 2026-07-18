@@ -13,6 +13,18 @@ function eventExit(event) {
   return event.exit || EXIT;
 }
 
+function takeProfitFill(position, bar) {
+  if (!Number.isFinite(position.takeProfit)) return null;
+  if (position.side === 1) {
+    if (bar.o >= position.takeProfit) return bar.o;
+    if (bar.h >= position.takeProfit) return position.takeProfit;
+  } else {
+    if (bar.o <= position.takeProfit) return bar.o;
+    if (bar.l <= position.takeProfit) return position.takeProfit;
+  }
+  return null;
+}
+
 function breakoutEventAt(prepared, index, config) {
   if (index < 20 || index + 1 >= prepared.bars.length) return null;
   const bar = prepared.bars[index], premium = prepared.premium?.close[index], premiumZ = prepared.premium?.z[index];
@@ -98,6 +110,7 @@ function simulateBreakoutPeriod({ preparedSymbols, events, layers, selections, s
       const exit = eventExit(position.event);
       if (time - position.event.entryTime >= exit.maxHoldBars * FOUR_HOURS) { close(position, bar.o, time, 'time'); continue; }
       const fill = stopFill(position, bar); if (fill != null) { close(position, fill, time, 'stop'); continue; }
+      const takeProfit = takeProfitFill(position, bar); if (takeProfit != null) { close(position, takeProfit, time, 'take_profit'); continue; }
       const atr = prepared.atr[index];
       if (exit.trailAtr != null && position.side === 1) { position.best = Math.max(position.best, bar.h); position.stop = Math.max(position.stop, position.best - exit.trailAtr * atr); }
       else if (exit.trailAtr != null) { position.best = Math.min(position.best, bar.l); position.stop = Math.min(position.stop, position.best + exit.trailAtr * atr); }
@@ -113,7 +126,9 @@ function simulateBreakoutPeriod({ preparedSymbols, events, layers, selections, s
       const qty = positionSize({ equity: openEquity, entry: bar.o, stop, remainingGross: openEquity * 1.5 - grossExposure(time) });
       if (!(qty > 0)) continue;
       const entryFee = qty * bar.o * costForLayer(layer, scenario) / 2; cash -= entryFee; executedSignals++;
-      const position = { key, event, layer, side: event.side, qty, entryPrice: bar.o, stop, best: bar.o, lastPrice: bar.o, entryFee, fundingPnl: 0 };
+      const takeProfitAtr = eventExit(event).takeProfitAtr;
+      const takeProfit = Number.isFinite(takeProfitAtr) ? bar.o + event.side * takeProfitAtr * initialAtr : null;
+      const position = { key, event, layer, side: event.side, qty, entryPrice: bar.o, stop, takeProfit, best: bar.o, lastPrice: bar.o, entryFee, fundingPnl: 0 };
       positions.set(key, position); const fill = stopFill(position, bar); if (fill != null) close(position, fill, time, 'stop');
     }
     pending = [];
@@ -131,4 +146,4 @@ function simulateBreakoutPeriod({ preparedSymbols, events, layers, selections, s
   const run = { initialEquity, finalEquity: cash, trades, equity, finalSignals, executedSignals }; run.summary = summarizeBreakoutRun(run); return run;
 }
 
-module.exports = { CONFIGS, EXIT, eventExit, breakoutEventAt, scanBreakoutEvents, chooseBreakoutCandidate, summarizeBreakoutRun, simulateBreakoutPeriod };
+module.exports = { CONFIGS, EXIT, eventExit, takeProfitFill, breakoutEventAt, scanBreakoutEvents, chooseBreakoutCandidate, summarizeBreakoutRun, simulateBreakoutPeriod };

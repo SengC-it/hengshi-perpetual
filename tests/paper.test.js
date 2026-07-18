@@ -82,3 +82,30 @@ test('position sizing honors risk, symbol and gross caps', () => {
   });
   assert.equal(qty, 125);
 });
+
+test('V12.7 short remains open at the V12.4 72-hour time exit', () => {
+  const entryTime = Date.parse('2026-07-17T04:00:00Z');
+  const bars = Array.from({ length: 19 }, (_, index) => ({
+    openTime: entryTime + index * 4 * 60 * 60 * 1000,
+    open: 100,
+    high: 101,
+    low: 99,
+    close: 100
+  }));
+  const prepared = {
+    bars,
+    atr: Array(19).fill(1),
+    ema20: Array(19).fill(100)
+  };
+  const short = position({
+    side: -1,
+    stop_price: 102,
+    best_price: 100,
+    trail_atr: 3,
+    mean_exit_ema20: false
+  });
+  const baseline = advancePosition({ ...short, max_hold_bars: 18 }, prepared, 18);
+  const candidate = advancePosition({ ...short, max_hold_bars: 24 }, prepared, 18);
+  assert.equal(baseline.trade.reason, 'time');
+  assert.equal(candidate.trade, null);
+});

@@ -72,6 +72,20 @@ export const STRATEGY = Object.freeze({
   }
 });
 
+export const EXIT_SHADOW = Object.freeze({
+  version: 'hengshi-v12.7-exit-shadow-2026q3',
+  authorization: 'PAPER_ONLY',
+  liveOrdersEnabled: false,
+  baselineVersion: STRATEGY.version,
+  short: Object.freeze({
+    ...STRATEGY.short.exit,
+    maxHoldBars: 24
+  }),
+  long: Object.freeze({
+    ...STRATEGY.long.exit
+  })
+});
+
 export function assertPaperOnly() {
   if (STRATEGY.authorization !== 'PAPER_ONLY' || STRATEGY.liveOrdersEnabled !== false) {
     throw new Error('strategy safety lock is invalid');
