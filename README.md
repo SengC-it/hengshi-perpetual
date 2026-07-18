@@ -40,6 +40,7 @@ npm.cmd test
 ```text
 supabase/migrations/202607160001_hengshi_shadow.sql
 supabase/migrations/20260718164833_hengshi_v127_exit_shadow.sql
+supabase/migrations/20260718165443_hengshi_v127_backfill_open_positions.sql
 ```
 
 为安全复用共享的 `crypto-alerts` 项目，本系统只创建以下带前缀的对象：
