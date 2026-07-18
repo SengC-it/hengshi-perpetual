@@ -12,8 +12,21 @@ export default async function handler(request, response) {
   }
   try {
     const result = await runShadowScan();
+    console.info(JSON.stringify({
+      component: 'hengshi-cron',
+      event: 'request_succeeded',
+      status: result.status,
+      runId: result.runId ?? null,
+      liveOrdersEnabled: false
+    }));
     return response.status(200).json({ ok: true, ...result });
   } catch (error) {
+    console.error(JSON.stringify({
+      component: 'hengshi-cron',
+      event: 'request_failed',
+      error: String(error?.message || error).slice(0, 1000),
+      liveOrdersEnabled: false
+    }));
     return response.status(500).json({
       ok: false,
       error: error.message,

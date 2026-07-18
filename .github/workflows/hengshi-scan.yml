@@ -36,8 +36,5 @@ jobs:
             --show-error \
             --silent \
             --max-time 330 \
-            --retry 2 \
-            --retry-all-errors \
-            --retry-delay 20 \
             --header "Authorization: Bearer ${CRON_SECRET}" \
             "https://hengshi-perpetual.vercel.app/api/${TARGET_ENDPOINT}"
