@@ -67,9 +67,11 @@ ALERT_EMAIL_TO
 
 ## 定时扫描
 
-Vercel Hobby 计划只允许每日 Cron，因此本项目不使用 Vercel Cron。`.github/workflows/hengshi-scan.yml` 会在 UTC 每 4 小时后的第 5 分钟调用 `/api/cron`。
+Vercel Hobby 计划只允许每日 Cron，因此本项目使用 Supabase Cron。`hengshi-four-hour-scan` 会在每根 UTC 4 小时 K 线收盘后的第 5 分钟调用 `/api/cron`；网页和邮件统一显示北京时间，数据库仍使用 UTC 作为标准存储格式。
 
-Vercel 项目与 GitHub 仓库必须配置相同的 `CRON_SECRET`。工作流通过 `Authorization: Bearer ...` 请求头调用受保护端点，不创建公开的扫描入口。
+Vercel Production 的 `CRON_SECRET` 与 Supabase Vault 的 `hengshi_cron_secret` 必须一致。Cron 通过 `Authorization: Bearer ...` 请求头调用受保护端点，不创建公开的扫描入口。GitHub Actions 仅保留手动验证，不再承担自动调度。
+
+扫描必须在 K 线收盘后 10 分钟内开始；超过时限会记录失败并发送告警，不会使用已经过去的下一根 K 线开盘价追溯生成信号。
 
 ## 前瞻门槛
 

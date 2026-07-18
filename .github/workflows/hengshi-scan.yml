@@ -1,8 +1,6 @@
-name: Hengshi four-hour scan
+name: Hengshi manual verification
 
 on:
-  schedule:
-    - cron: '5 */4 * * *'
   workflow_dispatch:
     inputs:
       endpoint:

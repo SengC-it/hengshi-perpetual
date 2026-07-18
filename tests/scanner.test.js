@@ -2,11 +2,45 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { STRATEGY } from '../config/strategy.js';
 import { FOUR_HOURS } from '../lib/binance.js';
-import { expectedCompletedBarTime, runShadowScan } from '../lib/scanner.js';
+import {
+  MAX_SCAN_DELAY_MS,
+  expectedCompletedBarTime,
+  runShadowScan,
+  scanDelayMs
+} from '../lib/scanner.js';
 
 test('expected completed bar is the previous four-hour interval', () => {
   const now = Date.parse('2026-07-18T04:05:00Z');
   assert.equal(expectedCompletedBarTime(now), Date.parse('2026-07-18T00:00:00Z'));
+  assert.equal(scanDelayMs(now, expectedCompletedBarTime(now)), 5 * 60 * 1000);
+});
+
+test('scan started more than ten minutes after close is rejected before market access', async () => {
+  const calls = [];
+  let marketRequests = 0;
+  const now = STRATEGY.validFrom + FOUR_HOURS + MAX_SCAN_DELAY_MS + 1;
+  const barTime = expectedCompletedBarTime(now);
+
+  await assert.rejects(runShadowScan({
+    now,
+    fetchImpl: async () => {
+      marketRequests += 1;
+      return new Response('{}', { status: 200 });
+    },
+    dependencies: {
+      claimScan: async () => ({ claimed: true, run: { id: 'stale-run' } }),
+      failScan: async (runId, error) => calls.push(['fail', runId, error.message]),
+      sendFailureEmail: async (error, context) => {
+        calls.push(['email', error.message, context.barTime]);
+        return { sent: true };
+      }
+    }
+  }), /stale scan rejected/);
+
+  assert.equal(marketRequests, 0);
+  assert.deepEqual(calls.map(call => call[0]), ['fail', 'email']);
+  assert.equal(calls[0][1], 'stale-run');
+  assert.equal(calls[1][2], barTime);
 });
 
 test('initial Binance failure is recorded and emailed after the scan is claimed', async () => {
