@@ -99,8 +99,8 @@
         <h2>扫描状态</h2>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>K线（北京时间）</th><th>状态</th><th>市场覆盖</th><th>候选</th><th>新信号</th><th>邮件</th></tr></thead>
-            <tbody id="runs"><tr><td colspan="6" class="empty">暂无扫描记录</td></tr></tbody>
+            <thead><tr><th>K线（北京时间）</th><th>扫描时间（北京时间）</th><th>状态</th><th>市场覆盖</th><th>候选</th><th>新信号</th><th>邮件</th></tr></thead>
+            <tbody id="runs"><tr><td colspan="7" class="empty">暂无扫描记录</td></tr></tbody>
           </table>
         </div>
         <div class="status" id="status"></div>
@@ -145,12 +145,13 @@
           document.querySelector('#runs').innerHTML = data.runs.length ? data.runs.map(row => `
             <tr>
               <td>${esc(beijingTime(row.bar_time))}</td>
+              <td>${esc(beijingTime(row.started_at))}</td>
               <td>${esc(row.status)}</td>
               <td>${row.symbols_scanned ?? 0}/${row.symbols_requested ?? 0}</td>
               <td>${row.qualified_candidates ?? 0}</td>
               <td>${row.signals_created ?? 0}</td>
               <td>${esc(row.email_status ?? '—')}</td>
-            </tr>`).join('') : '<tr><td colspan="6" class="empty">独立前瞻扫描尚未开始</td></tr>';
+            </tr>`).join('') : '<tr><td colspan="7" class="empty">独立前瞻扫描尚未开始</td></tr>';
           status.textContent = `${data.strategy.version} · 有效期 ${data.strategy.validFrom.slice(0, 10)} 至 ${data.strategy.validThrough.slice(0, 10)} · 实盘下单：关闭`;
         } catch (error) {
           status.textContent = `等待部署配置：${error.message}`;
