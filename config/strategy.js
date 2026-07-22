@@ -5,11 +5,11 @@ const v11Candidate = require('../work/binance_medium_frequency/forward_candidate
 
 export const STRATEGY = Object.freeze({
   name: '衡势 Quant',
-  version: 'hengshi-v12.4-shadow-2026q3',
+  version: 'hengshi-v12.8-executable-entry-2026q3',
   authorization: 'PAPER_ONLY',
   liveOrdersEnabled: false,
-  evidenceStatus: 'FROZEN_CAUSAL_FORWARD_SHADOW',
-  validFrom: v11Candidate.validFrom,
+  evidenceStatus: 'HISTORICAL_EXECUTION_PARITY_FORWARD_PENDING',
+  validFrom: Date.parse('2026-07-23T00:00:00Z'),
   validThrough: v11Candidate.validThrough,
   developmentDataObservedThrough: v11Candidate.developmentDataObservedThrough,
   activeLayers: ['liquid_low_vol', 'liquid_high_vol', 'tail_high_vol'],
@@ -68,15 +68,19 @@ export const STRATEGY = Object.freeze({
     signalInterval: '4h',
     causalSelection: true,
     historicalDailyBestSelectionDisabled: true,
+    entryDelayMs: 5 * 60 * 1000,
+    entryPrice: 'Binance mark price fetched after the 4h signal closes',
+    exitPath: '5m stops with 4h-close trailing updates',
     note: 'Signals are ranked only after the current 4h bar closes; future bars from the same day are never used.'
   }
 });
 
 export const EXIT_SHADOW = Object.freeze({
+  enabled: false,
   version: 'hengshi-v12.7-exit-shadow-2026q3',
   authorization: 'PAPER_ONLY',
   liveOrdersEnabled: false,
-  baselineVersion: STRATEGY.version,
+  baselineVersion: 'hengshi-v12.4-shadow-2026q3',
   short: Object.freeze({
     ...STRATEGY.short.exit,
     maxHoldBars: 24

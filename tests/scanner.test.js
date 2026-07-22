@@ -6,17 +6,29 @@ import {
   MAX_SCAN_DELAY_MS,
   expectedCompletedBarTime,
   runShadowScan,
-  scanDelayMs
+  scanDelayMs,
+  withExecutableEntries
 } from '../lib/scanner.js';
 
-test('V12.7 exit shadow changes only the short maximum holding period', () => {
-  assert.equal(EXIT_SHADOW.baselineVersion, STRATEGY.version);
+test('V12.7 exit shadow is frozen while V12.8 restarts independent validation', () => {
+  assert.equal(EXIT_SHADOW.enabled, false);
+  assert.equal(EXIT_SHADOW.baselineVersion, 'hengshi-v12.4-shadow-2026q3');
   assert.equal(EXIT_SHADOW.liveOrdersEnabled, false);
   assert.deepEqual(EXIT_SHADOW.long, STRATEGY.long.exit);
   assert.deepEqual(EXIT_SHADOW.short, {
     ...STRATEGY.short.exit,
     maxHoldBars: 24
   });
+});
+
+test('executable entries use the mark price captured at scan time and reject missing marks', () => {
+  const entryTime = Date.parse('2026-07-23T04:05:01Z');
+  const candidates = [
+    { symbol: 'AAAUSDT', entryPrice: 1 },
+    { symbol: 'BBBUSDT', entryPrice: 1 }
+  ];
+  const rows = withExecutableEntries(candidates, new Map([['AAAUSDT', 1.2345]]), entryTime);
+  assert.deepEqual(rows, [{ symbol: 'AAAUSDT', entryPrice: 1.2345, entryTime }]);
 });
 
 test('expected completed bar is the previous four-hour interval', () => {

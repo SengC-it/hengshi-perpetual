@@ -40,7 +40,7 @@ export default async function handler(_request, response) {
   try {
     const [data, exitShadowData] = await Promise.all([
       getDashboardData(STRATEGY.version),
-      getDashboardData(EXIT_SHADOW.version)
+      EXIT_SHADOW.enabled ? getDashboardData(EXIT_SHADOW.version) : Promise.resolve(null)
     ]);
     let markPrices = new Map();
     let markPriceStatus = 'not_needed';
@@ -71,7 +71,7 @@ export default async function handler(_request, response) {
           summary: metrics(data.trades),
           openPositions: data.positions.length
         },
-        candidate: {
+        candidate: exitShadowData && {
           version: EXIT_SHADOW.version,
           maxShortHoldBars: EXIT_SHADOW.short.maxHoldBars,
           summary: metrics(exitShadowData.trades),

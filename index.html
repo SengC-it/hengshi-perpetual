@@ -178,8 +178,8 @@
           document.querySelector('#pf').textContent = data.summary.profitFactor == null ? '—' : num(data.summary.profitFactor);
           document.querySelector('#dd').textContent = pct(data.summary.maxDrawdown);
           document.querySelector('#trades').textContent = data.summary.trades;
-          const comparison = [data.exitComparison.baseline, data.exitComparison.candidate];
-          document.querySelector('#exit-comparison').innerHTML = comparison.map(row => `
+          const comparison = [data.exitComparison.baseline, data.exitComparison.candidate].filter(Boolean);
+          document.querySelector('#exit-comparison').innerHTML = comparison.length > 1 ? comparison.map(row => `
             <tr>
               <td>${esc(row.version)}</td>
               <td>${pct(row.summary.totalReturn)}</td>
@@ -188,7 +188,7 @@
               <td>${row.summary.trades}</td>
               <td>${row.openPositions}</td>
               <td>${row.maxShortHoldBars * 4}小时</td>
-            </tr>`).join('');
+            </tr>`).join('') : '<tr><td colspan="7" class="empty">V12.8 执行一致性前瞻验证中；旧 V12.7 退出 A/B 已冻结，不与新版本混算。</td></tr>';
           document.querySelector('#signals').innerHTML = data.signals.length ? data.signals.map(row => {
             const exit = exitInfo(row);
             return `

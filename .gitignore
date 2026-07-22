@@ -10,6 +10,7 @@ supabase/.temp/
 # Local research data and generated artifacts
 work/binance_medium_frequency/v5c_data/
 work/binance_medium_frequency/all_perpetuals_data/
+work/binance_medium_frequency/v128_5m_archive/
 work/binance_backtest/
 work/**/data/
 work/**/*_package_*/
