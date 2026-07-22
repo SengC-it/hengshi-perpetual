@@ -57,6 +57,9 @@
       th { color: var(--muted); font-size: 12px; font-weight: 600; }
       .long { color: var(--green); }
       .short { color: var(--red); }
+      .profit { color: var(--green); font-weight: 700; }
+      .loss { color: var(--red); font-weight: 700; }
+      .live { color: var(--amber); }
       .empty { color: var(--muted); padding: 26px 10px; text-align: center; }
       .status { margin-top: 16px; color: var(--muted); }
       .note { color: var(--muted); margin: -6px 0 14px; }
@@ -108,6 +111,17 @@
       </section>
 
       <section class="panel">
+        <h2>每笔信号盈亏（V12.4）</h2>
+        <p class="note">已平仓为实际纸面净盈亏；持仓中按 Binance 当前标记价估算。净盈亏已扣除模拟往返手续费，并计入已记录的资金费。</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>信号时间（北京时间）</th><th>合约</th><th>方向</th><th>状态</th><th>模拟入场</th><th>出场 / 标记价</th><th>净盈亏</th><th>净收益率</th><th>退出说明</th><th>持有</th></tr></thead>
+            <tbody id="signal-pnl"><tr><td colspan="10" class="empty">正在加载逐笔盈亏</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel">
         <h2>扫描状态</h2>
         <div class="table-wrap">
           <table>
@@ -123,6 +137,7 @@
     <script>
       const pct = value => Number.isFinite(value) ? `${(value * 100).toFixed(2)}%` : '—';
       const num = value => Number.isFinite(value) ? value.toFixed(2) : '—';
+      const money = value => Number.isFinite(value) ? `${value > 0 ? '+' : ''}${value.toFixed(2)} USDT` : '—';
       const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
       const beijingFormatter = new Intl.DateTimeFormat('zh-CN-u-nu-latn', {
         timeZone: 'Asia/Shanghai',
@@ -140,6 +155,18 @@
         return row.side === 1
           ? { point: price(exit.referenceEma20), rule: '收盘到EMA20后下根开盘', hours: Number(exit.maxHoldBars) * 4 }
           : { point: price(exit.referenceProfitPrice), rule: `${exit.trailAtr ?? 3}ATR移动止盈`, hours: Number(exit.maxHoldBars) * 4 };
+      };
+      const exitReason = row => {
+        if (row.state === 'open') {
+          return row.markAvailable
+            ? '实时标记价估算（含预估平仓手续费）'
+            : '标记价暂不可用，等待下次刷新';
+        }
+        return ({
+          stop: '触发止损 / 移动止损',
+          mean: 'EMA20 反转退出',
+          time: '最长持有到期'
+        })[row.reason] || row.reason || '已结算';
       };
       async function load() {
         const status = document.querySelector('#status');
@@ -178,6 +205,25 @@
               <td>${Number.isFinite(exit.hours) ? `${exit.hours}小时` : '—'}</td>
             </tr>`;
           }).join('') : '<tr><td colspan="10" class="empty">独立前瞻期尚无信号</td></tr>';
+          document.querySelector('#signal-pnl').innerHTML = data.signalPnl.length ? data.signalPnl.map(row => {
+            const pnlClass = row.netPnl > 0 ? 'profit' : row.netPnl < 0 ? 'loss' : '';
+            const state = row.state === 'open'
+              ? `<span class="live">持仓中（浮动）</span>`
+              : '已结算';
+            return `
+            <tr>
+              <td>${esc(beijingTime(row.signalTime))}</td>
+              <td>${esc(row.symbol)}</td>
+              <td class="${row.side === 1 ? 'long' : 'short'}">${row.side === 1 ? '多' : '空'}</td>
+              <td>${state}</td>
+              <td>${price(row.entryPrice)}</td>
+              <td>${price(row.closePrice)}</td>
+              <td class="${pnlClass}">${money(row.netPnl)}</td>
+              <td class="${pnlClass}">${pct(row.pnlPercent)}</td>
+              <td>${esc(exitReason(row))}</td>
+              <td>${row.barsHeld == null ? '—' : `${row.barsHeld * 4}小时`}</td>
+            </tr>`;
+          }).join('') : '<tr><td colspan="10" class="empty">独立前瞻期尚无已开仓信号</td></tr>';
           document.querySelector('#runs').innerHTML = data.runs.length ? data.runs.map(row => `
             <tr>
               <td>${esc(beijingTime(row.bar_time))}</td>
@@ -192,6 +238,7 @@
         } catch (error) {
           status.textContent = `等待部署配置：${error.message}`;
           document.querySelector('#signals').innerHTML = '<tr><td colspan="7" class="empty">Supabase 尚未完成连接</td></tr>';
+          document.querySelector('#signal-pnl').innerHTML = '<tr><td colspan="10" class="empty">暂时无法读取逐笔盈亏</td></tr>';
         }
       }
       load();

@@ -1,5 +1,7 @@
 import { EXIT_SHADOW, STRATEGY } from '../config/strategy.js';
+import { fetchMarkPrices } from '../lib/binance.js';
 import { getDashboardData, isDatabaseConfigured } from '../lib/db.js';
+import { buildSignalPnlRows } from '../lib/pnl.js';
 
 function metrics(trades) {
   const pnl = trades.map(row => Number(row.net_pnl));
@@ -40,6 +42,16 @@ export default async function handler(_request, response) {
       getDashboardData(STRATEGY.version),
       getDashboardData(EXIT_SHADOW.version)
     ]);
+    let markPrices = new Map();
+    let markPriceStatus = 'not_needed';
+    if (data.positions.length) {
+      try {
+        markPrices = await fetchMarkPrices(data.positions.map(position => position.symbol));
+        markPriceStatus = markPrices.size === data.positions.length ? 'live' : 'partial';
+      } catch (error) {
+        markPriceStatus = 'unavailable';
+      }
+    }
     return response.status(200).json({
       ok: true,
       strategy: {
@@ -69,7 +81,9 @@ export default async function handler(_request, response) {
       signals: data.signals,
       runs: data.runs,
       openPositions: data.positions,
-      recentTrades: data.trades.slice(-30).reverse()
+      recentTrades: data.trades.slice(-30).reverse(),
+      signalPnl: buildSignalPnlRows(data.trades, data.positions, markPrices),
+      markPriceStatus
     });
   } catch (error) {
     return response.status(500).json({ ok: false, error: error.message, liveOrdersEnabled: false });
